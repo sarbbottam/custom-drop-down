@@ -1,0 +1,19 @@
+.modern input[type='text'], .modern input[type='password'], .modern select {
+  font-size: $form_fields_font_size/$base_font_size+em;
+  color: #000;
+  padding: $form_fields_padding/$form_fields_font_size +em;
+  border: $form_fields_border;
+  border-radius:  $form_fields_border_radius;
+  width: 100%;
+  &:focus{
+    outline: none;
+    border: $highlight_border;
+  }
+}
+
+.modern select {
+  margin: 0;
+  height: 44/$form_fields_font_size +em;
+  vertical-align: bottom; // required for firefox
+  cursor: pointer;
+}

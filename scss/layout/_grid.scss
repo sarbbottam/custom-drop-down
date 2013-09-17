@@ -1,0 +1,14 @@
+.row {
+  position: relative;
+  zoom : 1;
+}
+
+.input-row {
+  margin-top: 6/$base_font_size+em;
+}
+
+.column {
+  position: relative;
+  @include inline-block;
+  height: 100%;
+}

@@ -1,0 +1,10 @@
+.submit {
+  margin: 0;
+  font-size: $button_font_size/$base_font_size + em;
+  color: $button_font_color;
+  background: $button_background;
+  border: $button_border;
+  border-radius: $default_border_radius;
+  padding: $button_padding;
+  cursor: pointer;
+}
