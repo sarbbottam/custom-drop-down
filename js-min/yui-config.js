@@ -1,0 +1,1 @@
+var YUI_config={combine:!0,groups:{app:{modules:{placeholder:{fullpath:"../js/polyfill/placeholder.js"},"country-code-drop-down":{fullpath:"../js/fancy-drop-down/country-code-drop-down.js"},formatter:{fullpath:"../js/formatter/formatter.js"}}}}};
