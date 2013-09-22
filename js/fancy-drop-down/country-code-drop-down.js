@@ -6,25 +6,25 @@ YUI.add('country-code-drop-down', function(Y) {
     var customCountryCodeDropDown;
 
     customCountryCodeDropDown = function(target) {
-      var customCountryCodeDropDownMarkup,
-        customCountryCodeDropDownUpdateStyle,
-        customCountryCodeDropDownEventHandler,
-        customCountryCodeDropDownIndex,
+      var customDropDownMarkup,
+        customDropDownUpdateStyle,
+        customDropDownEventHandler,
+        customDropDownIndex,
         referenceNodes;
 
-      customCountryCodeDropDownMarkup = new Y.CustomDropDownMenu.CustomCountryCodeDropDownMarkup(target);
-      referenceNodes = customCountryCodeDropDownMarkup.createAndInjectSelectedCountryCodeHTML();
+      customDropDownMarkup = new Y.CustomDropDownMenu.CustomDropDownMarkup(target);
+      referenceNodes = customDropDownMarkup.createAndInjectSelectedCountryCodeHTML();
 
-      customCountryCodeDropDownUpdateStyle = new Y.CustomDropDownMenu.CustomCountryCodeDropDownUpdateStyle(referenceNodes);
-      customCountryCodeDropDownUpdateStyle.updateMobileNodePadding();
+      customDropDownUpdateStyle = new Y.CustomDropDownMenu.CustomDropDownUpdateStyle(referenceNodes);
+      customDropDownUpdateStyle.updateCorrespondingNodePadding();
 
-      customCountryCodeDropDownIndex = new Y.CustomDropDownMenu.CustomCountryCodeDropDownIndex(referenceNodes);
+      customDropDownIndex = new Y.CustomDropDownMenu.CustomDropDownIndex(referenceNodes);
 
-      customCountryCodeDropDownIndex.init();
+      customDropDownIndex.init();
 
-      customCountryCodeDropDownEventHandler = new Y.CustomDropDownMenu.CustomCountryCodeDropDownEventHandler(referenceNodes, customCountryCodeDropDownUpdateStyle, customCountryCodeDropDownIndex);
+      customDropDownEventHandler = new Y.CustomDropDownMenu.CustomDropDownEventHandler(referenceNodes, customDropDownUpdateStyle, customDropDownIndex);
 
-      customCountryCodeDropDownEventHandler.init();
+      customDropDownEventHandler.init();
     };
 
     Y.all('[data=country-code-drop-down]').each(function(target){
@@ -42,8 +42,8 @@ YUI.add('country-code-drop-down', function(Y) {
     };
 
     Y.on('click', hideCountryCodesContainer, 'body');
-    Y.on('hide-country-codes-container', function(e, countryCodesMenuNode) {
+    Y.on('hide-available-options-container', function(e, countryCodesMenuNode) {
       hideCountryCodesContainer(countryCodesMenuNode);
     });
   }
-}, {requires: ['country-code-drop-down-markup', 'country-code-drop-down-update-style', 'country-code-drop-down-event-handler', 'country-code-drop-down-index']});
+}, {requires: ['custom-drop-down-markup', 'custom-drop-down-update-style', 'custom-drop-down-event-handler', 'custom-drop-down-index']});
