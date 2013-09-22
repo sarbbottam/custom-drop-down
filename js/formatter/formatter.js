@@ -1,3 +1,4 @@
+// need to refactor
 YUI.add('formatter', function(Y) {
 
   var keyupHandler, formatter, updateFormat;
@@ -53,9 +54,9 @@ YUI.add('formatter', function(Y) {
   updateFormat = function(target ){
     var mobileNode, selectedIndex, dataFormat;
 
-    mobileNode = Y.one('#'+target.getAttribute('mobile-field-id'));
+    mobileNode = Y.one('#'+target.getAttribute('corresponding-field-id'));
     selectedIndex = target.get('selectedIndex') === -1?0:target.get('selectedIndex');
-    dataFormat = target.all('option').item(selectedIndex).getAttribute('mobile-data-format');
+    dataFormat = target.all('option').item(selectedIndex).getAttribute('corresponding-field-data-format');
 
     if(dataFormat) {
       mobileNode.setAttribute('data-format', dataFormat);

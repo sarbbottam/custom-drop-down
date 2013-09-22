@@ -25,7 +25,7 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
       e.halt();
       selectedIndex = _this.selectNode.get('selectedIndex');
       _this.availableOptionsContainerNode.setStyle('display', 'block');
-      _this.correspondingNode.addClass('highlight-border');
+      _this.correspondingNode && _this.correspondingNode.addClass('highlight-border');
       _this.customDropDownUpdateStyle.highlightMenu(selectedIndex);
       Y.fire('hide-available-options-container', null, _this.availableOptionsContainerNode);
     },
@@ -78,6 +78,7 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
       e.halt();
       var countryCode = e.target.getAttribute('data-code'), html = [], selectedIndex;
 
+      // use configurable template
       html.push('<span class="');
       html.push(e.target.one('span').get('className'));
       html.push('"></span>&nbsp;<span class="country-code-arrow-container"><span class="country-code-arrow"></span></span>&nbsp;');
@@ -87,7 +88,7 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
       _this.selectedOptionNode.one('a').set('innerHTML', html.join(''));
 
       // update correspondingNode padding
-      _this.customDropDownUpdateStyle.updateCorrespondingNodePadding();
+      _this.correspondingNode && _this.customDropDownUpdateStyle.updateCorrespondingNodePadding();
 
       // hide availableOptionsContainerNode
       _this.availableOptionsContainerNode.setStyle('display', 'none');
@@ -100,7 +101,7 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
       Y.one('#' + _this.selectedOptionAriaLabeledById).set('innerHTML',_this.optionNodes.item(selectedIndex).get('innerHTML'));
 
       // focus correspondingNode
-      _this.correspondingNode.focus();
+      _this.correspondingNode && _this.correspondingNode.focus();
     },
 
     highlightCorrespondingNode : function(e, _this){
@@ -140,20 +141,22 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
 
       this.availableOptionsContainerNode.all('li').on('click', this.selectOption, null, _this);
 
-      // menu item focus handler
-      this.availableOptionsContainerNode.all('a').on('focus', this.highlightCorrespondingNode, null, _this);
+      if (_this.correspondingNode) {
+        // menu item focus handler
+        this.availableOptionsContainerNode.all('a').on('focus', this.highlightCorrespondingNode, null, _this);
 
-      // menu item blur handler
-      this.availableOptionsContainerNode.all('a').on('blur', this.unHighlightCorrespondingNode, null, _this);
+        // menu item blur handler
+        this.availableOptionsContainerNode.all('a').on('blur', this.unHighlightCorrespondingNode, null, _this);
 
-      // add highlight border
-      this.selectedOptionNode.one('a').on('focus', this.highlightCorrespondingNode, null, _this);
+        // add highlight border
+        this.selectedOptionNode.one('a').on('focus', this.highlightCorrespondingNode, null, _this);
 
-      // remove highlight border
-      this.selectedOptionNode.one('a').on('blur', this.unHighlightCorrespondingNode, null, _this);
+        // remove highlight border
+        this.selectedOptionNode.one('a').on('blur', this.unHighlightCorrespondingNode, null, _this);
 
-      // remove highlight border
-      this.correspondingNode.on('blur', this.unHighlightCorrespondingNode, null, _this);
+        // remove highlight border
+        this.correspondingNode.on('blur', this.unHighlightCorrespondingNode, null, _this);
+      }
 
     }
 
