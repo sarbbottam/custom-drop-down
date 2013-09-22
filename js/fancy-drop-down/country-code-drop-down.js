@@ -27,7 +27,13 @@ YUI.add('country-code-drop-down', function(Y) {
         hotKeysIndex = {},
         lastHotKeyUsed,
         lastHotKeyIndex,
-        updateHotKeysIndex;
+        updateHotKeysIndex,
+        getFirstIndexOfCountryName,
+        getIndexOfCountryName,
+        countryNames = [],
+        countryNameStartsWith = "",
+        previousKeyPressTime,
+        currentKeyPressTime;
 
       // get the node reference
       countryCodeSelectNode = target;
@@ -117,15 +123,16 @@ YUI.add('country-code-drop-down', function(Y) {
       countryCodesMenuNode = Y.one('#' + countryCodesMenuId);
 
       updateHotKeysIndex = function(target, hotKeysIndexCounter) {
-        var  countryName = target.one('a').get('innerHTML').replace(/<.*>&nbsp;&nbsp;/g, ''),
+        var  countryName = target.one('a').get('innerHTML').replace(/<.*>&nbsp;&nbsp;/g, '').toLowerCase(),
           hotKeyCharCode;
-        hotKeyCharCode = countryName.charCodeAt(0)+'';
-        if(hotKeysIndex[hotKeyCharCode]) {
-          hotKeysIndex[hotKeyCharCode].push(hotKeysIndexCounter);
-        } else {
-          hotKeysIndex[hotKeyCharCode] = [];
-          hotKeysIndex[hotKeyCharCode].push(hotKeysIndexCounter);
-        }
+        // hotKeyCharCode = countryName.charCodeAt(0)+'';
+        // if(hotKeysIndex[hotKeyCharCode]) {
+        //   hotKeysIndex[hotKeyCharCode].push(hotKeysIndexCounter);
+        // } else {
+        //   hotKeysIndex[hotKeyCharCode] = [];
+        //   hotKeysIndex[hotKeyCharCode].push(hotKeysIndexCounter);
+        // }
+        countryNames.push(countryName);
       };
 
       countryCodesMenuNode.all('li').each(function(target){
@@ -138,7 +145,6 @@ YUI.add('country-code-drop-down', function(Y) {
         e.halt();
         selectedIndex = countryCodeSelectNode.get('selectedIndex');
         countryCodesMenuNode.setStyle('display', 'block');
-        //console.log(countryCodeSelectNode.get('selectedIndex'));
         countryCodesMenuNode.all('ul li').item(selectedIndex).one('a').focus();
         mobileNode.addClass('highlight-border');
         if(!menuHeight) {
@@ -202,28 +208,72 @@ YUI.add('country-code-drop-down', function(Y) {
         }
       });
 
+      getFirstIndexOfCountryName = function(index) {
+        var substrLength = countryNameStartsWith.length;
+        while (index >= 0) {
+          if(countryNames[index].substr(0, substrLength) !== countryNameStartsWith) {
+            break;
+          }
+          index -= 1;
+        }
+        return index + 1;
+      };
+
+      getIndexOfCountryName = function() {
+        var low = 0, high = countryNames.length - 1, mid,
+          currentCountryName,
+          substrLength = countryNameStartsWith.length;
+
+        while (low <= high) {
+          mid = (low + high) / 2 | 0;
+          currentCountryName = countryNames[mid].substr(0, substrLength);
+
+          if (currentCountryName < countryNameStartsWith) {
+            low = mid + 1;
+          }
+          else if (currentCountryName > countryNameStartsWith) {
+            high = mid - 1;
+          }
+          else {
+            return getFirstIndexOfCountryName(mid);
+          }
+        }
+
+        return -1;
+      };
+
       // hot keys handler on countryCodesMenuNode
       // hot keys implementation is circular
       // not only it selects the first item on the basis of hotkey
       // but moves ahead to the next element and so forth on successive key press
       // on reaching the last element, on further succesive same hot key press
       // the very first item is selected
-      countryCodesMenuNode.on('keydown', function(e){
+      countryCodesMenuNode.on('keypress', function(e){
         //if(e.keyCode >= 65 && e.keyCode <= 90) {
-          if(e.keyCode !== lastHotKeyUsed) {
-            lastHotKeyIndex = 0;
-          } else {
-            lastHotKeyIndex += 1;
-            if(lastHotKeyIndex === (hotKeysIndex[e.keyCode+''].length) ) {
-              lastHotKeyIndex = 0;
-            }
+          currentKeyPressTime = new Date().getTime();
+          if(previousKeyPressTime && (currentKeyPressTime - previousKeyPressTime) > 500) {
+            countryNameStartsWith = "";
           }
-          menuSize = countryCodesMenuNode.all('ul li').size();
-          if(hotKeysIndex[e.keyCode+'']) {
-            selectedIndex = hotKeysIndex[e.keyCode+''][lastHotKeyIndex];
+          previousKeyPressTime = currentKeyPressTime;
+          countryNameStartsWith = countryNameStartsWith + String.fromCharCode(e.keyCode);
+          selectedIndex = getIndexOfCountryName();
+          if(selectedIndex !== -1) {
             highlightCountryCodeMenu();
-            lastHotKeyUsed = e.keyCode;
           }
+          // if(e.keyCode !== lastHotKeyUsed) {
+          //   lastHotKeyIndex = 0;
+          // } else {
+          //   lastHotKeyIndex += 1;
+          //   if(lastHotKeyIndex === (hotKeysIndex[e.keyCode+''].length) ) {
+          //     lastHotKeyIndex = 0;
+          //   }
+          // }
+          // menuSize = countryCodesMenuNode.all('ul li').size();
+          // if(hotKeysIndex[e.keyCode+'']) {
+          //   selectedIndex = hotKeysIndex[e.keyCode+''][lastHotKeyIndex];
+          //   highlightCountryCodeMenu();
+          //   lastHotKeyUsed = e.keyCode;
+          // }
         //}
       });
 
