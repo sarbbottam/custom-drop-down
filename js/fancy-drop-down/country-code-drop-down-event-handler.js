@@ -4,10 +4,12 @@ YUI.add('country-code-drop-down-event-handler', function(Y) {
 
   CustomCountryCodeDropDownEventHandler = function(referenceNodes, customCountryCodeDropDownUpdateStyle, customCountryCodeDropDownIndex) {
     this.countryCodeSelectNode = referenceNodes.countryCodeSelectNode;
+    this.countryCodeOptionNodes = referenceNodes.countryCodeOptionNodes;
     this.selectedCountryCodeNode = referenceNodes.selectedCountryCodeNode;
     this.mobileNode = referenceNodes.mobileNode;
     this.mobileNodePlaceholder = this.mobileNode.get('parentNode').one('.placeholder');
     this.countryCodesMenuNode = referenceNodes.countryCodesMenuNode;
+    this.countryNameId = referenceNodes.countryNameId;
     this.menuHeight = '';
     this.selectedIndex = 0;
     this.customCountryCodeDropDownUpdateStyle = customCountryCodeDropDownUpdateStyle;
@@ -66,6 +68,7 @@ YUI.add('country-code-drop-down-event-handler', function(Y) {
       html.push('<span class="');
       html.push(e.target.one('span').get('className'));
       html.push('"></span>&nbsp;<span class="country-code-arrow-container"><span class="country-code-arrow"></span></span>&nbsp;');
+      html.push('<span id="'+ _this.countryNameId +'" class="clipped">'+ _this.countryCodeOptionNodes.item(_this.selectedIndex).get('innerHTML')+'</span>');
       html.push(countryCode);
 
       _this.selectedCountryCodeNode.one('a').set('innerHTML', html.join(''));

@@ -8,6 +8,7 @@ YUI.add('country-code-drop-down-markup', function(Y) {
     this.countryCodesMenuHTML = [];
     this.selectedCountryCodeId = 'selected-country-code-for-' + target.getAttribute('mobile-field-id');
     this.countryCodesMenuId = 'country-codes-menu-for-' + target.getAttribute('mobile-field-id');
+    this.countryNameId = 'country-name-for-' + target.getAttribute('mobile-field-id');
     this.countryCodeOptionNodes = target.all('option');
     this.selectedIndex = target.get('selectedIndex');
     this.mobileNode = Y.one('#'+target.getAttribute('mobile-field-id'));
@@ -22,12 +23,12 @@ YUI.add('country-code-drop-down-markup', function(Y) {
         countryCodeOptionNodes = this.countryCodeOptionNodes,
         selectedIndex = this.selectedIndex;
         selectedCountryCodeHTML.push('<div id="'+ this.selectedCountryCodeId +'" class="column selected-country-code">');
-          selectedCountryCodeHTML.push('<a href="#'+ this.countryCodesMenuId + '" role="menuitem" aria-haspopup="true" aria-labelledby="country-name" tabindex="0">');
+          selectedCountryCodeHTML.push('<a href="#'+ this.countryCodesMenuId + '" role="menuitem" aria-haspopup="true" aria-labelledby="'+ this.countryNameId +'" tabindex="0">');
 
             selectedCountryCodeHTML.push('<span class="flag-');
             selectedCountryCodeHTML.push(countryCodeOptionNodes.item(selectedIndex).getAttribute('data-country-code'));
             selectedCountryCodeHTML.push('"></span>&nbsp;<span class="country-code-arrow-container"><span class="country-code-arrow"></span></span>&nbsp;');
-            selectedCountryCodeHTML.push('<span id="country-name" class="clipped">'+ countryCodeOptionNodes.item(selectedIndex).get('innerHTML')+'</span>');
+            selectedCountryCodeHTML.push('<span id="'+ this.countryNameId +'" class="clipped">'+ countryCodeOptionNodes.item(selectedIndex).get('innerHTML')+'</span>');
             selectedCountryCodeHTML.push(countryCodeOptionNodes.item(selectedIndex).get('value'));
 
           selectedCountryCodeHTML.push('</a>');
@@ -76,9 +77,11 @@ YUI.add('country-code-drop-down-markup', function(Y) {
         this.countryCodesMenuNode = Y.one('#' + this.countryCodesMenuId);
         return {
           countryCodeSelectNode : this.countryCodeSelectNode,
+          countryCodeOptionNodes : this.countryCodeOptionNodes,
           selectedCountryCodeNode : this.selectedCountryCodeNode,
           mobileNode : this.mobileNode,
-          countryCodesMenuNode : this.countryCodesMenuNode
+          countryCodesMenuNode : this.countryCodesMenuNode,
+          countryNameId : this.countryNameId
         };
       }
 
