@@ -62,13 +62,13 @@ YUI.add('country-code-drop-down-markup', function(Y) {
       var availableOptionsHTML = this.availableOptionsHTML;
         availableOptionsHTML.push('<div class="country-codes-container available-options-container" id="'+ this.availableOptionsContainerId +'" style="width:'+ this.correspondingNodeWidth+'">');
           availableOptionsHTML.push('<ul>');
-            this.optionNodes.each(function(countryCodeOption) {
+            this.optionNodes.each(function(option) {
               availableOptionsHTML.push('<li>');
-                availableOptionsHTML.push('<a href="#" role="menuitem" data-code="' + countryCodeOption.get('value') + '">');
+                availableOptionsHTML.push('<a href="#" role="menuitem" data-code="' + option.get('value') + '">');
                   availableOptionsHTML.push('<span class="flag-');
-                  availableOptionsHTML.push(countryCodeOption.getAttribute('country-tld'));
+                  availableOptionsHTML.push(option.getAttribute('country-tld'));
                   availableOptionsHTML.push('"></span>&nbsp;&nbsp;');
-                  availableOptionsHTML.push(countryCodeOption.get('innerHTML'));
+                  availableOptionsHTML.push(option.get('innerHTML'));
                 availableOptionsHTML.push('</a>');
               availableOptionsHTML.push('</li>');
             });
