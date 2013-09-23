@@ -10,6 +10,7 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
     this.availableOptionsContainerNode = config.referenceNodes.availableOptionsContainerNode;
     this.selectedOptionAriaLabeledById = config.referenceNodes.selectedOptionAriaLabeledById;
 
+    this.customDropDownMarkup = config.customDropDownMarkup;
     this.customDropDownStyleUpdater = config.customDropDownStyleUpdater;
     this.customDropDownIndex = config.customDropDownIndex;
 
@@ -86,33 +87,29 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
 
     selectOption : function(e, _this){
       e.halt();
-      var countryCode = e.target.getAttribute('data-code'), html = [], selectedIndex;
-      // ToDo
-      // if the select option is re-selected do not process
-      // fire an event, let the custom-drop-down-markup update the markup
-      html.push('<span class="');
-      html.push(e.target.one('span').get('className'));
-      html.push('"></span>&nbsp;<span class="country-code-arrow-container"><span class="country-code-arrow"></span></span>&nbsp;');
-      html.push('<span id="'+ _this.selectedOptionAriaLabeledById +'" class="clipped"></span>');
-      html.push(countryCode);
+      var selectedIndex = _this.availableOptionsContainerNode.all('li').indexOf(e.target.get('parentNode'));
 
-      _this.selectedOptionNode.one('a').set('innerHTML', html.join(''));
+      // if the selected option is immediate previous selected do not process
+      if(_this.selectNode.get('selectedIndex') !== selectedIndex) {
 
-      // update correspondingNode padding
-      _this.correspondingNode && _this.customDropDownStyleUpdater.updateCorrespondingNodePadding();
+        _this.selectedOptionNode.one('a').set('innerHTML', _this.customDropDownMarkup.getSelectedOptionHTML(e.target));
+
+        // update correspondingNode padding
+        _this.correspondingNode && _this.customDropDownStyleUpdater.updateCorrespondingNodePadding();
+
+        // update corresponding select/option. and fire change event
+        _this.selectNode.set('selectedIndex', selectedIndex);
+        Y.fire('option-changed', null, _this.selectNode);
+
+        Y.one('#' + _this.selectedOptionAriaLabeledById).set('innerHTML',_this.optionNodes.item(selectedIndex).get('innerHTML'));
+      }
 
       // hide availableOptionsContainerNode
       _this.availableOptionsContainerNode.setStyle('display', 'none');
 
-      // update corresponding select/option. and fire change event
-      selectedIndex = _this.availableOptionsContainerNode.all('li').indexOf(e.target.get('parentNode'));
-      _this.selectNode.set('selectedIndex', selectedIndex);
-      Y.fire('option-changed', null, _this.selectNode);
-
-      Y.one('#' + _this.selectedOptionAriaLabeledById).set('innerHTML',_this.optionNodes.item(selectedIndex).get('innerHTML'));
-
       // focus correspondingNode
       _this.correspondingNode && _this.correspondingNode.focus();
+
     },
 
     highlightCorrespondingNode : function(e, _this){

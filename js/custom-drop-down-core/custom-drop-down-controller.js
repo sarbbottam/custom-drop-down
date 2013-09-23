@@ -59,6 +59,7 @@ YUI.add('custom-drop-down-controller', function(Y) {
 
       this.customDropDownEventHandler = new this.CustomDropDownEventHandler({
                                     referenceNodes : this.referenceNodes,
+                                    customDropDownMarkup : this.customDropDownMarkup,
                                     customDropDownStyleUpdater : this.customDropDownStyleUpdater,
                                     customDropDownIndex : this.customDropDownIndex
                                   });

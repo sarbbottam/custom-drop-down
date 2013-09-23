@@ -90,6 +90,18 @@ YUI.add('country-code-drop-down-markup', function(Y) {
           availableOptionsContainerNode : this.availableOptionsContainerNode,
           selectedOptionAriaLabeledById : this.selectedOptionAriaLabeledById
         };
+      },
+
+      getSelectedOptionHTML : function(selectedOption) {
+        var optionText = selectedOption.getAttribute('data-code'), html = [], selectedIndex;
+
+        html.push('<span class="');
+        html.push(selectedOption.one('span').get('className'));
+        html.push('"></span>&nbsp;<span class="country-code-arrow-container"><span class="country-code-arrow"></span></span>&nbsp;');
+        html.push('<span id="'+ this.selectedOptionAriaLabeledById +'" class="clipped"></span>');
+        html.push(optionText);
+
+        return html.join('');
       }
 
   }, true);
