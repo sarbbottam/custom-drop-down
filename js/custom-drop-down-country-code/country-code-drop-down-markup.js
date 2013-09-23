@@ -1,8 +1,8 @@
-YUI.add('custom-drop-down-markup', function(Y) {
+YUI.add('country-code-drop-down-markup', function(Y) {
 
-  var CustomDropDownMarkup;
+  var CountryCodeDropDownMarkup;
 
-  CustomDropDownMarkup = function(config) {
+  CountryCodeDropDownMarkup = function(config) {
     this.selectNode = config.target;
 
     this.selectedOptionId = 'selected-option-for-' + this.selectNode.get('id');
@@ -23,7 +23,7 @@ YUI.add('custom-drop-down-markup', function(Y) {
     this.availableOptionsHTML = [];
   };
 
-  Y.mix(CustomDropDownMarkup.prototype, {
+  Y.mix(CountryCodeDropDownMarkup.prototype, {
     createAndInjectSelectedOptionHTML : function() {
       var selectedOptionHTML = this.selectedOptionHTML,
         optionNodes = this.optionNodes,
@@ -96,6 +96,6 @@ YUI.add('custom-drop-down-markup', function(Y) {
 
   Y.namespace('CustomDropDownMenu');
 
-  Y.CustomDropDownMenu.CustomDropDownMarkup = CustomDropDownMarkup;
+  Y.CustomDropDownMenu.CountryCodeDropDownMarkup = CountryCodeDropDownMarkup;
 
 });

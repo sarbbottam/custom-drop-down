@@ -32,4 +32,4 @@ YUI.add('placeholder', function (Y) {
 
   }
 
-}, '0.0.1', {requires: ['node-base']});
+}, '0.0.1', {requires: ['node']});

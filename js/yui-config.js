@@ -5,28 +5,32 @@ var YUI_config = {
       'modules': {
         //polyfill
         'placeholder' : {
-          fullpath: '../js/polyfill/placeholder.js'
+          fullpath: '../js/polyfill/placeholder.js',
+          requires: ['node']
         },
-        // custom drop downs
-        'custom-drop-down-markup' : {
-          fullpath: '../js/fancy-drop-down/custom-drop-down-markup.js'
-        },
+        // custom drop down core
         'custom-drop-down-style-updater' : {
-          fullpath: '../js/fancy-drop-down/custom-drop-down-style-updater.js'
+          fullpath: '../js/custom-drop-down-core/custom-drop-down-style-updater.js',
+          requires: ['node']
         },
         'custom-drop-down-index' : {
-          fullpath: '../js/fancy-drop-down/custom-drop-down-index.js'
+          fullpath: '../js/custom-drop-down-core/custom-drop-down-index.js',
+          requires: ['node']
         },
         'custom-drop-down-event-handler' : {
-          fullpath: '../js/fancy-drop-down/custom-drop-down-event-handler.js'
+          fullpath: '../js/custom-drop-down-core/custom-drop-down-event-handler.js',
+          requires: ['node']
         },
         'custom-drop-down-controller' : {
-          fullpath: '../js/fancy-drop-down/custom-drop-down-controller.js',
-          requires: ['custom-drop-down-style-updater', 'custom-drop-down-event-handler', 'custom-drop-down-index']
+          fullpath: '../js/custom-drop-down-core/custom-drop-down-controller.js',
+          requires: ['node', 'custom-drop-down-style-updater', 'custom-drop-down-event-handler', 'custom-drop-down-index']
         },
-        // uses custom-drop-down-controller & custom-drop-down-markup
-        'country-code-drop-down' : {
-          fullpath: '../js/fancy-drop-down/country-code-drop-down.js'
+        // custom drop down country code
+        'country-code-drop-down-markup' : {
+          fullpath: '../js/custom-drop-down-country-code/country-code-drop-down-markup.js'
+        },
+        'country-code-drop-down' : { // uses custom-drop-down-controller & custom-drop-down-markup
+          fullpath: '../js/custom-drop-down-country-code/country-code-drop-down.js'
         },
         // auto format mobile number
         'formatter' : {

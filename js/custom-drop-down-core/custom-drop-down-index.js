@@ -60,4 +60,4 @@ YUI.add('custom-drop-down-index', function(Y) {
 
   Y.CustomDropDownMenu.CustomDropDownIndex = CustomDropDownIndex;
 
-});
+}, {requires : ['node']});

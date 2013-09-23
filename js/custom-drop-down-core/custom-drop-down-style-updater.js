@@ -56,4 +56,4 @@ YUI.add('custom-drop-down-style-updater', function(Y) {
 
   Y.CustomDropDownMenu.CustomDropDownStyleUpdater = CustomDropDownStyleUpdater;
 
-});
+}, {requires : ['node']});

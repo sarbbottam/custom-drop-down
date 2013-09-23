@@ -2,10 +2,10 @@ YUI.add('country-code-drop-down', function(Y) {
 
   if (Y.one('html').hasClass('modern')) {
 
-    Y.use('custom-drop-down-controller', 'custom-drop-down-markup', function(Y){
+    Y.use('custom-drop-down-controller', 'country-code-drop-down-markup', function(Y){
 
       Y.all('[custom-drop-down-type=country-code]').each(function(target) {
-        var CustomDropDownMarkup = Y.CustomDropDownMenu.CustomDropDownMarkup,
+        var CustomDropDownMarkup = Y.CustomDropDownMenu.CountryCodeDropDownMarkup,
           customDropDownController = new Y.CustomDropDownMenu.CustomDropDownController({
                                         target : target,
                                         ie9WidthOffset : 17,

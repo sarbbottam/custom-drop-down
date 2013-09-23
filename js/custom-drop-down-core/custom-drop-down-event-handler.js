@@ -185,4 +185,4 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
 
   Y.CustomDropDownMenu.CustomDropDownEventHandler = CustomDropDownEventHandler;
 
-});
+}, {requires : ['node']});

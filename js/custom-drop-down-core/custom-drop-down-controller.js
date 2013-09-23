@@ -78,4 +78,4 @@ YUI.add('custom-drop-down-controller', function(Y) {
 
   Y.CustomDropDownMenu.CustomDropDownController = CustomDropDownController;
 
-}, {requires: ['custom-drop-down-style-updater', 'custom-drop-down-event-handler', 'custom-drop-down-index']});
+}, {requires: ['node', 'custom-drop-down-style-updater', 'custom-drop-down-event-handler', 'custom-drop-down-index']});
