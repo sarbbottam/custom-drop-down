@@ -11,9 +11,16 @@ YUI.add('country-code-drop-down', function(Y) {
         customDropDownUpdateStyle,
         customDropDownEventHandler,
         customDropDownIndex,
-        referenceNodes;
+        referenceNodes,
+        correspondingNode = Y.one('#'+target.getAttribute('corresponding-field-id')),
+        ie9WidthOffset = 17;
 
-      customDropDownMarkup = new Y.CustomDropDownMenu.CustomDropDownMarkup(target);
+      customDropDownMarkup = new Y.CustomDropDownMenu.CustomDropDownMarkup({
+                              target : target,
+                              correspondingNode: correspondingNode,
+                              ie9WidthOffset: ie9WidthOffset
+                            });
+
       referenceNodes = customDropDownMarkup.createAndInjectSelectedCountryCodeHTML();
 
       customDropDownUpdateStyle = new Y.CustomDropDownMenu.CustomDropDownUpdateStyle(referenceNodes);

@@ -8,6 +8,8 @@ YUI.add('custom-drop-down-update-style', function(Y) {
     this.correspondingNodePlaceholder = this.correspondingNode.get('parentNode').one('.placeholder');
     this.availableOptionsContainerNode = referenceNodes.availableOptionsContainerNode;
     this.menuHeight = '';
+    this.ie8HeightOffset = -0.27;
+    this.ie8AboveHeightOffset = 0.42;
   };
 
   Y.mix(CustomDropDownUpdateStyle.prototype, {
@@ -32,14 +34,13 @@ YUI.add('custom-drop-down-update-style', function(Y) {
       // magic numbers need to be configurable
 
       if(!this.menuHeight) {
+        this.menuHeight = parseInt(this.availableOptionsContainerNode.one('ul li a').get('offsetHeight'), 0);
         if(Y.UA.ie) {
           if(Y.UA.ie === 8) {
-            this.menuHeight = parseInt(this.availableOptionsContainerNode.one('ul li a').get('offsetHeight'), 0) - 0.27;
+            this.menuHeight = this.menuHeight + this.ie8HeightOffset;
           } else{
-            this.menuHeight = parseInt(this.availableOptionsContainerNode.one('ul li a').get('offsetHeight'), 0) + 0.42;
+            this.menuHeight = this.menuHeight + this.ie8AboveHeightOffset;
           }
-        } else {
-          this.menuHeight = parseInt(this.availableOptionsContainerNode.one('ul li a').get('offsetHeight'), 0);
         }
       }
       //console.log(selectedIndex);

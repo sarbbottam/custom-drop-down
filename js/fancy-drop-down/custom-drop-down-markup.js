@@ -2,19 +2,25 @@ YUI.add('custom-drop-down-markup', function(Y) {
 
   var CustomDropDownMarkup;
 
-  CustomDropDownMarkup = function(target) {
-    this.selectNode = target;
-    this.selectedOptionHTML = [];
-    this.availableOptionsHTML = [];
-    this.selectedOptionId = 'selected-option-for-' + target.getAttribute('corresponding-field-id');
-    this.availableOptionsContainerId = 'available-options-container-for-' + target.getAttribute('corresponding-field-id');
-    this.selectedOptionAriaLabeledById = 'option-for-' + target.getAttribute('corresponding-field-id');
-    this.optionNodes = target.all('option');
-    this.selectedIndex = target.get('selectedIndex');
-    this.correspondingNode = Y.one('#'+target.getAttribute('corresponding-field-id'));
+  CustomDropDownMarkup = function(config) {
+    this.selectNode = config.target;
+
+    this.selectedOptionId = 'selected-option-for-' + this.selectNode.get('id');
+    this.availableOptionsContainerId = 'available-options-container-for-' + this.selectNode.get('id');
+    this.selectedOptionAriaLabeledById = 'option-for-' + this.selectNode.get('id');
+
+    this.optionNodes = this.selectNode.all('option');
+    this.selectedIndex = this.selectNode.get('selectedIndex');
+
+    this.correspondingNode = config.correspondingNode;
+
+    this.ie9WidthOffset = config.ie9WidthOffset;
+
     this.correspondingNodeWidth = '';
     this.selectedOptionNode = '';
     this.availableOptionsContainerNode = '';
+    this.selectedOptionHTML = [];
+    this.availableOptionsHTML = [];
   };
 
   Y.mix(CustomDropDownMarkup.prototype, {
@@ -40,12 +46,13 @@ YUI.add('custom-drop-down-markup', function(Y) {
 
         this.selectedOptionNode = Y.one('#' + this.selectedOptionId);
 
-        // magic number needs to be configurable
+        // magic number is passed as configuration
+        this.correspondingNodeWidth = this.correspondingNode.get('offsetWidth');
 
         if(Y.UA.ie === 9) {
-          this.correspondingNodeWidth = this.correspondingNode.get('offsetWidth') + 17 + 'px';
+          this.correspondingNodeWidth = this.correspondingNodeWidth + this.ie9WidthOffset + 'px';
         } else {
-          this.correspondingNodeWidth = this.correspondingNode.get('offsetWidth')+ 'px';
+          this.correspondingNodeWidth = this.correspondingNodeWidth+ 'px';
         }
 
         return this.createAndInjectCountryCodesHTML();

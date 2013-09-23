@@ -147,6 +147,14 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
 
       this.availableOptionsContainerNode.all('li').on('click', this.selectOption, null, _this);
 
+      // ie does not fire click event when enter is pressed on a link
+      this.availableOptionsContainerNode.all('li').on('keydown', function(e, _this){
+        if(e.keyCode === 13) {
+          e.halt();
+          _this.selectOption(e, _this);
+        }
+      }, null, _this);
+
       if (_this.correspondingNode) {
         // menu item focus handler
         this.availableOptionsContainerNode.all('a').on('focus', this.highlightCorrespondingNode, null, _this);
