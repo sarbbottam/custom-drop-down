@@ -37,14 +37,14 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
       menuSize = _this.availableOptionsContainerNode.all('ul li').size();
       switch(e.keyCode) {
         case 38:
-                if(_this.selectedIndex === 0) {
+                if(_this.selectedIndex <= 0) {
                   _this.selectedIndex = menuSize;
                 }
                 _this.selectedIndex -= 1;
                 _this.customDropDownUpdateStyle.highlightMenu(_this.selectedIndex);
                 break;
         case 40:
-                if(_this.selectedIndex === menuSize - 1) {
+                if(_this.selectedIndex >= menuSize - 1) {
                   _this.selectedIndex = -1;
                 }
                 _this.selectedIndex += 1;
@@ -77,7 +77,8 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
     selectOption : function(e, _this){
       e.halt();
       var countryCode = e.target.getAttribute('data-code'), html = [], selectedIndex;
-
+      // ToDo
+      // if the select option is re-selected do not process
       // use configurable template
       html.push('<span class="');
       html.push(e.target.one('span').get('className'));
