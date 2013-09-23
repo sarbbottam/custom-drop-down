@@ -16,7 +16,7 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
 
     this.correspondingNodePlaceholder = this.correspondingNode.get('parentNode').one('.placeholder');
 
-    this.selectedIndex = 0;
+    this.selectedIndex = this.selectNode.get('selectedIndex') === -1?0:this.selectNode.get('selectedIndex');
 
     this.menuHeight = '';
 
