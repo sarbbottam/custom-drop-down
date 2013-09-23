@@ -5,49 +5,77 @@ YUI.add('custom-drop-down-controller', function(Y) {
   CustomDropDownController = function(config) {
     this.target = config.target;
     this.ie9WidthOffset = config.ie9WidthOffset;
-    this.correspondingNode = '';
+    this.ie8HeightOffset = config.ie8HeightOffset;
+    this.ie8AboveHeightOffset = config.ie8AboveHeightOffset;
     this.CustomDropDownMarkup = config.CustomDropDownMarkup;
-    this.CustomDropDownUpdateStyle = config.CustomDropDownUpdateStyle;
-    this.CustomDropDownEventHandler = config.CustomDropDownEventHandler;
-    this.CustomDropDownIndex = config.CustomDropDownIndex;
+
+    this.CustomDropDownStyleUpdater = Y.CustomDropDownMenu.CustomDropDownStyleUpdater;
+    this.CustomDropDownIndex = Y.CustomDropDownMenu.CustomDropDownIndex;
+    this.CustomDropDownEventHandler = Y.CustomDropDownMenu.CustomDropDownEventHandler;
+
+    this.customDropDownMarkup = '';
+    this.customDropDownStyleUpdater = '';
+    this.customDropDownIndex = '';
+    this.customDropDownEventHandler = '';
+
     this.referenceNodes = '';
+    this.correspondingNode = '';
   };
 
   Y.mix(CustomDropDownController.prototype, {
 
+    hideAllAvailableOptionsContainer : function(currentOptionsContainer){
+      Y.all('.available-options-container').each(function(target){
+        if(target !== currentOptionsContainer && target.getStyle('display') === 'block') {
+          target.setStyle('display', 'none');
+        }
+      });
+    },
+
     init : function() {
-      var _this = this,
-        customDropDownMarkup,
-        customDropDownUpdateStyle,
-        customDropDownEventHandler,
-        customDropDownIndex,
-        referenceNodes;
 
-      this.correspondingNode = Y.one('#'+target.getAttribute('corresponding-field-id'));
-      customDropDownMarkup = new this.CustomDropDownMarkup(this.target, this.ie9WidthOffset);
-      this.referenceNodes = customDropDownMarkup.createAndInjectSelectedCountryCodeHTML();
+      var _this = this;
 
-      customDropDownUpdateStyle = new this.CustomDropDownUpdateStyle(referenceNodes);
+      this.correspondingNode = Y.one('#'+ this.target.getAttribute('corresponding-field-id'));
+      this.customDropDownMarkup = new this.CustomDropDownMarkup({
+                              target : this.target,
+                              correspondingNode: this.correspondingNode,
+                              ie9WidthOffset: this.ie9WidthOffset
+                            });
 
+      this.referenceNodes = this.customDropDownMarkup.createAndInjectSelectedOptionHTML();
 
+      this.customDropDownStyleUpdater = new this.CustomDropDownStyleUpdater({
+                                    referenceNodes : this.referenceNodes,
+                                    ie8HeightOffset : this.ie8HeightOffset,
+                                    ie8AboveHeightOffset : this.ie8AboveHeightOffset
+                                  });
 
-      customDropDownUpdateStyle = new Y.CustomDropDownMenu.CustomDropDownUpdateStyle(referenceNodes);
-      // if correspondig field is present
-      this.correspondingNode && customDropDownUpdateStyle.updateCorrespondingNodePadding();
+      // if correspondig node is present
+      this.correspondingNode && this.customDropDownStyleUpdater.updateCorrespondingNodePadding();
 
-      customDropDownIndex = new this.CustomDropDownIndex(referenceNodes);
-      customDropDownIndex.init();
+      this.customDropDownIndex = new this.CustomDropDownIndex(this.referenceNodes);
+      this.customDropDownIndex.init();
 
-      // pass as a single argument
-      customDropDownEventHandler = new this.CustomDropDownEventHandler(referenceNodes, customDropDownUpdateStyle, customDropDownIndex);
-      customDropDownEventHandler.init();
-    };
+      this.customDropDownEventHandler = new this.CustomDropDownEventHandler({
+                                    referenceNodes : this.referenceNodes,
+                                    customDropDownStyleUpdater : this.customDropDownStyleUpdater,
+                                    customDropDownIndex : this.customDropDownIndex
+                                  });
+
+      this.customDropDownEventHandler.init();
+
+      Y.on('click', this.hideAllAvailableOptionsContainer, 'body');
+
+      Y.on('hide-available-options-container', function(e, availableOptionsContainerNode) {
+        _this.hideAllAvailableOptionsContainer(availableOptionsContainerNode);
+      });
+
     }
-
   }, true);
 
   Y.namespace('CustomDropDownMenu');
 
   Y.CustomDropDownMenu.CustomDropDownController = CustomDropDownController;
 
-});
+}, {requires: ['custom-drop-down-style-updater', 'custom-drop-down-event-handler', 'custom-drop-down-index']});

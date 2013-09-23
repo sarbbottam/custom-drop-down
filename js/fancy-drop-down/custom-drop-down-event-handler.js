@@ -2,18 +2,23 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
 
   var CustomDropDownEventHandler;
 
-  CustomDropDownEventHandler = function(referenceNodes, customDropDownUpdateStyle, customDropDownIndex) {
-    this.selectNode = referenceNodes.selectNode;
-    this.optionNodes = referenceNodes.optionNodes;
-    this.selectedOptionNode = referenceNodes.selectedOptionNode;
-    this.correspondingNode = referenceNodes.correspondingNode;
+  CustomDropDownEventHandler = function(config) {
+    this.selectNode = config.referenceNodes.selectNode;
+    this.optionNodes = config.referenceNodes.optionNodes;
+    this.selectedOptionNode = config.referenceNodes.selectedOptionNode;
+    this.correspondingNode = config.referenceNodes.correspondingNode;
+    this.availableOptionsContainerNode = config.referenceNodes.availableOptionsContainerNode;
+    this.selectedOptionAriaLabeledById = config.referenceNodes.selectedOptionAriaLabeledById;
+
+    this.customDropDownStyleUpdater = config.customDropDownStyleUpdater;
+    this.customDropDownIndex = config.customDropDownIndex;
+
     this.correspondingNodePlaceholder = this.correspondingNode.get('parentNode').one('.placeholder');
-    this.availableOptionsContainerNode = referenceNodes.availableOptionsContainerNode;
-    this.selectedOptionAriaLabeledById = referenceNodes.selectedOptionAriaLabeledById;
-    this.menuHeight = '';
+
     this.selectedIndex = 0;
-    this.customDropDownUpdateStyle = customDropDownUpdateStyle;
-    this.customDropDownIndex = customDropDownIndex;
+
+    this.menuHeight = '';
+
     this.desiredOptionStartsWith = '';
     this.currentKeyPressTime = 0;
     this.previousKeyPressTime = 0;
@@ -26,7 +31,7 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
       selectedIndex = _this.selectNode.get('selectedIndex');
       _this.availableOptionsContainerNode.setStyle('display', 'block');
       _this.correspondingNode && _this.correspondingNode.addClass('highlight-border');
-      _this.customDropDownUpdateStyle.highlightMenu(selectedIndex);
+      _this.customDropDownStyleUpdater.highlightMenu(selectedIndex);
       Y.fire('hide-available-options-container', null, _this.availableOptionsContainerNode);
     },
 
@@ -41,14 +46,14 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
                   _this.selectedIndex = menuSize;
                 }
                 _this.selectedIndex -= 1;
-                _this.customDropDownUpdateStyle.highlightMenu(_this.selectedIndex);
+                _this.customDropDownStyleUpdater.highlightMenu(_this.selectedIndex);
                 break;
         case 40:
                 if(_this.selectedIndex >= menuSize - 1) {
                   _this.selectedIndex = -1;
                 }
                 _this.selectedIndex += 1;
-                _this.customDropDownUpdateStyle.highlightMenu(_this.selectedIndex);
+                _this.customDropDownStyleUpdater.highlightMenu(_this.selectedIndex);
                 break;
         case 9:
                 _this.correspondingNode.focus();
@@ -75,7 +80,7 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
       desiredOptionIndex = _this.customDropDownIndex.getIndexOfDesiredOption(_this.desiredOptionStartsWith);
       if(desiredOptionIndex !== -1) {
         _this.selectedIndex = desiredOptionIndex;
-        _this.customDropDownUpdateStyle.highlightMenu(_this.selectedIndex);
+        _this.customDropDownStyleUpdater.highlightMenu(_this.selectedIndex);
       }
     },
 
@@ -94,7 +99,7 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
       _this.selectedOptionNode.one('a').set('innerHTML', html.join(''));
 
       // update correspondingNode padding
-      _this.correspondingNode && _this.customDropDownUpdateStyle.updateCorrespondingNodePadding();
+      _this.correspondingNode && _this.customDropDownStyleUpdater.updateCorrespondingNodePadding();
 
       // hide availableOptionsContainerNode
       _this.availableOptionsContainerNode.setStyle('display', 'none');

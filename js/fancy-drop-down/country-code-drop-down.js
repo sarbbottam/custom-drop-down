@@ -1,56 +1,21 @@
 YUI.add('country-code-drop-down', function(Y) {
 
-  var countryCodesContainer;
-
   if (Y.one('html').hasClass('modern')) {
-    var customCountryCodeDropDown;
 
-    // create a constructor and pass the desired information / magic numbers
-    customCountryCodeDropDown = function(target) {
-      var customDropDownMarkup,
-        customDropDownUpdateStyle,
-        customDropDownEventHandler,
-        customDropDownIndex,
-        referenceNodes,
-        correspondingNode = Y.one('#'+target.getAttribute('corresponding-field-id')),
-        ie9WidthOffset = 17;
+    Y.use('custom-drop-down-controller', 'custom-drop-down-markup', function(Y){
 
-      customDropDownMarkup = new Y.CustomDropDownMenu.CustomDropDownMarkup({
-                              target : target,
-                              correspondingNode: correspondingNode,
-                              ie9WidthOffset: ie9WidthOffset
-                            });
-
-      referenceNodes = customDropDownMarkup.createAndInjectSelectedCountryCodeHTML();
-
-      customDropDownUpdateStyle = new Y.CustomDropDownMenu.CustomDropDownUpdateStyle(referenceNodes);
-      // if correspondig field is present
-      customDropDownUpdateStyle.updateCorrespondingNodePadding();
-
-      customDropDownIndex = new Y.CustomDropDownMenu.CustomDropDownIndex(referenceNodes);
-      customDropDownIndex.init();
-
-      // pass as a single argument
-      customDropDownEventHandler = new Y.CustomDropDownMenu.CustomDropDownEventHandler(referenceNodes, customDropDownUpdateStyle, customDropDownIndex);
-      customDropDownEventHandler.init();
-    };
-
-    Y.all('[custom-drop-down-type=country-code]').each(function(target){
-      // invoke the ToDo constructor from the use file
-      customCountryCodeDropDown(target);
-    });
-
-    hideAllAvailableOptionsContainer = function(currentOptionsContainer){
-      Y.all('.available-options-container').each(function(target){
-        if(target !== currentOptionsContainer && target.getStyle('display') === 'block') {
-          target.setStyle('display', 'none');
-        }
+      Y.all('[custom-drop-down-type=country-code]').each(function(target) {
+        var CustomDropDownMarkup = Y.CustomDropDownMenu.CustomDropDownMarkup,
+          customDropDownController = new Y.CustomDropDownMenu.CustomDropDownController({
+                                        target : target,
+                                        ie9WidthOffset : 17,
+                                        ie8HeightOffset : -0.27,
+                                        ie8AboveHeightOffset : 0.42,
+                                        CustomDropDownMarkup : CustomDropDownMarkup
+                                      });
+        customDropDownController.init();
       });
-    };
 
-    Y.on('click', hideAllAvailableOptionsContainer, 'body');
-    Y.on('hide-available-options-container', function(e, availableOptionsContainerNode) {
-      hideAllAvailableOptionsContainer(availableOptionsContainerNode);
     });
   }
-}, {requires: ['custom-drop-down-markup', 'custom-drop-down-update-style', 'custom-drop-down-event-handler', 'custom-drop-down-index']});
+});
