@@ -52,25 +52,25 @@ YUI.add('formatter', function(Y) {
   });
 
   updateFormat = function(target ){
-    var mobileNode, selectedIndex, dataFormat;
+    var correspondingNode, selectedIndex, dataFormat;
 
-    mobileNode = Y.one('#'+target.getAttribute('corresponding-field-id'));
+    correspondingNode = Y.one('#'+target.getAttribute('corresponding-field-id'));
     selectedIndex = target.get('selectedIndex') === -1?0:target.get('selectedIndex');
     dataFormat = target.all('option').item(selectedIndex).getAttribute('corresponding-field-data-format');
 
     if(dataFormat) {
-      mobileNode.setAttribute('data-format', dataFormat);
+      correspondingNode.setAttribute('data-format', dataFormat);
     } else {
-      mobileNode.setAttribute('data-format', '');
+      correspondingNode.setAttribute('data-format', '');
     }
-    formatter(mobileNode);
+    formatter(correspondingNode);
   };
 
   Y.all('[custom-drop-down-type=country-code]').each(function(target){
     updateFormat(target);
   });
 
-  Y.on('country-code-change', function(e, target ){
+  Y.on('option-changed', function(e, target ){
     updateFormat(target);
   });
 

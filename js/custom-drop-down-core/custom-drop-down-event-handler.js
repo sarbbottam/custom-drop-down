@@ -107,7 +107,7 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
       // update corresponding select/option. and fire change event
       selectedIndex = _this.availableOptionsContainerNode.all('li').indexOf(e.target.get('parentNode'));
       _this.selectNode.set('selectedIndex', selectedIndex);
-      Y.fire('country-code-change', null, _this.selectNode);
+      Y.fire('option-changed', null, _this.selectNode);
 
       Y.one('#' + _this.selectedOptionAriaLabeledById).set('innerHTML',_this.optionNodes.item(selectedIndex).get('innerHTML'));
 
