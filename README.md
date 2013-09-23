@@ -13,7 +13,7 @@
 #### PS: Make sure you are connected to internet YUI files are fetched from yui.yahooapis.com.
 
 #### ToDo:
-* ~~ Refactor the custom drop down code for separation of concerns, modular and configurable. ~~
+* <del> Refactor the custom drop down code for separation of concerns, modular and configurable. </del>
 * Refactor the formatter code for separation of concerns, modular and configurable.
 * Demo of other custom drop downs
 * Refactor the SCSS
