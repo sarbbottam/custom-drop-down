@@ -66,7 +66,7 @@ YUI.add('formatter', function(Y) {
     formatter(mobileNode);
   };
 
-  Y.all('[data=country-code-drop-down]').each(function(target){
+  Y.all('[custom-drop-down-type=country-code]').each(function(target){
     updateFormat(target);
   });
 

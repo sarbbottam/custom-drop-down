@@ -89,7 +89,7 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
       var countryCode = e.target.getAttribute('data-code'), html = [], selectedIndex;
       // ToDo
       // if the select option is re-selected do not process
-      // use configurable template
+      // fire an event, let the custom-drop-down-markup update the markup
       html.push('<span class="');
       html.push(e.target.one('span').get('className'));
       html.push('"></span>&nbsp;<span class="country-code-arrow-container"><span class="country-code-arrow"></span></span>&nbsp;');
