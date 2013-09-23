@@ -201,7 +201,7 @@ body {
 }
 
 /* line 1, ../scss/form-fields/_form-fields.scss */
-.modern input[type='text'], .modern input[type='password'], .modern select {
+.modern input[type='text'], .modern input[type='password'], .modern select, .placeholder {
   font-size: 1.2em;
   color: #000;
   padding: 0.55556em;
@@ -210,12 +210,24 @@ body {
   width: 100%;
 }
 /* line 8, ../scss/form-fields/_form-fields.scss */
-.modern input[type='text']:focus, .modern input[type='password']:focus, .modern select:focus {
+.modern input[type='text']:focus, .modern input[type='password']:focus, .modern select:focus, .placeholder:focus {
   outline: none;
   border: 1px solid #5771ff !important;
 }
 
 /* line 14, ../scss/form-fields/_form-fields.scss */
+.placeholder {
+  position: absolute;
+  border: 1px solid transparent;
+  color: #a5a5a5;
+}
+
+/* line 20, ../scss/form-fields/_form-fields.scss */
+.lowZIndex {
+  z-index: -1;
+}
+
+/* line 24, ../scss/form-fields/_form-fields.scss */
 .modern select {
   margin: 0;
   height: 2.44444em;

@@ -1,4 +1,4 @@
-.modern input[type='text'], .modern input[type='password'], .modern select {
+.modern input[type='text'], .modern input[type='password'], .modern select, .placeholder {
   font-size: $form_fields_font_size/$base_font_size+em;
   color: #000;
   padding: $form_fields_padding/$form_fields_font_size +em;
@@ -9,6 +9,16 @@
     outline: none;
     border: $highlight_border;
   }
+}
+
+.placeholder {
+  position: absolute;
+  border: 1px solid transparent;
+  color: #a5a5a5;
+}
+
+.lowZIndex {
+  z-index: -1;
 }
 
 .modern select {

@@ -62,14 +62,19 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
     },
 
     availableOptionsHotKeypressHandler : function(e, _this) {
+      var desiredOptionIndex = 0;
+      e.halt();
       _this.currentKeyPressTime = new Date().getTime();
       if(_this.previousKeyPressTime && (_this.currentKeyPressTime - _this.previousKeyPressTime) > 500) {
         _this.desiredOptionStartsWith = "";
       }
       _this.previousKeyPressTime = _this.currentKeyPressTime;
       _this.desiredOptionStartsWith = _this.desiredOptionStartsWith + String.fromCharCode(e.keyCode);
-      _this.selectedIndex = _this.customDropDownIndex.getIndexOfDesiredOption(_this.desiredOptionStartsWith);
-      if(_this.selectedIndex !== -1) {
+      // do not update the selectedindex if desiredOptionIndex is -1
+      // firefox/windows hack, firefox/windows listening to up/down/right/left arrow keypress
+      desiredOptionIndex = _this.customDropDownIndex.getIndexOfDesiredOption(_this.desiredOptionStartsWith);
+      if(desiredOptionIndex !== -1) {
+        _this.selectedIndex = desiredOptionIndex;
         _this.customDropDownUpdateStyle.highlightMenu(_this.selectedIndex);
       }
     },
