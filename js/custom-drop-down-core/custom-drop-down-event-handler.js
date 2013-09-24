@@ -69,6 +69,7 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
 
     availableOptionsHotKeypressHandler : function(e, _this) {
       var desiredOptionIndex = 0;
+      // halt for space and arrow keys
       e.halt();
       _this.currentKeyPressTime = new Date().getTime();
       if(_this.previousKeyPressTime && (_this.currentKeyPressTime - _this.previousKeyPressTime) > 500) {

@@ -32,9 +32,13 @@ var YUI_config = {
         'country-code-drop-down' : { // uses custom-drop-down-controller & custom-drop-down-markup
           fullpath: '../js/custom-drop-down-country-code/country-code-drop-down.js'
         },
-        // auto format mobile number
-        'formatter' : {
-          fullpath: '../js/formatter/formatter.js'
+        // input data formatter
+        'input-data-formatter' : {
+          fullpath: '../js/input-data-modifier/input-data-formatter.js'
+        },
+        // mobile number formatter
+        'mobile-number-formatter' : {
+          fullpath: '../js/mobile-number-modifier/mobile-number-formatter.js'
         }
       }
     }

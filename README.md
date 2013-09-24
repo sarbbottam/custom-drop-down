@@ -14,7 +14,7 @@
 
 #### ToDo:
 * <del> Refactor the custom drop down code for separation of concerns, modular and configurable. </del>
-* Refactor the formatter code for separation of concerns, modular and configurable.
+* <del> Refactor the formatter code for separation of concerns, modular and configurable. </del>
 * Demo of other custom drop downs
 * Refactor the SCSS
 * Lazy load css reated to custom drop down only when the module loads
