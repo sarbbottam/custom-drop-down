@@ -139,6 +139,12 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
       this.availableOptionsContainerNode.on('keydown', this.availableOptionsContainerNodeKeydownHandler, null, _this);
 
       // hot keypress handler
+      this.selectedOptionNode.on('keypress', function(e) {
+        _this.selectedOptionNodeEventHandler(e, _this);
+        _this.availableOptionsHotKeypressHandler(e, _this);
+      });
+
+      // hot keypress handler
       this.availableOptionsContainerNode.on('keypress', this.availableOptionsHotKeypressHandler, null, _this);
 
       // focus the selected country code on mouse over

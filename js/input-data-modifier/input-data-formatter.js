@@ -12,6 +12,7 @@ YUI.add('input-data-formatter', function(Y) {
   Y.mix(InputDataFormatter.prototype, {
 
     keyupHandler : function(e, separatorIndex, separator){
+      var cursorPosition = this.get('selectionStart');
       if(e.keyCode > 47 && e.keyCode < 58) {
         var formattedValue = this.get('value'),
           formattedValueLength = formattedValue.length,
@@ -20,6 +21,7 @@ YUI.add('input-data-formatter', function(Y) {
         for( var i = 0, l = separatorIndex.length; i < l; i+=1 ) {
           if(separatorIndex[i] <= formattedValueLength && formattedValue.charAt(separatorIndex[i]) !== separator[i]) {
             formattedValueArray.splice(separatorIndex[i], 0, separator[i]);
+            cursorPosition++;
             if(separator[i+1] === ' ') {
               formattedValueArray.splice(separatorIndex[i+1], 0, separator[i+1]);
               i+=1;
@@ -29,6 +31,8 @@ YUI.add('input-data-formatter', function(Y) {
         }
         this.set('value', formattedValueArray.join(''));
       }
+      this.set('selectionStart', cursorPosition);
+      this.set('selectionEnd', cursorPosition);
     },
 
     formatter : function(target) {
