@@ -173,10 +173,10 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
         _this.selectedIndex = _this.availableOptionsContainerNode.all('li').indexOf(e.target.get('parentNode'));
       }, null, _this);
 
-      this.availableOptionsContainerNode.all('li').on('click', this.selectOption, null, _this);
+      this.availableOptionsContainerNode.all('li a').on('click', this.selectOption, null, _this);
 
       // ie does not fire click event when enter is pressed on a link
-      this.availableOptionsContainerNode.all('li').on('keydown', function(e, _this){
+      this.availableOptionsContainerNode.all('li a').on('keydown', function(e, _this){
         if(e.keyCode === 13) {
           e.halt();
           _this.selectOption(e, _this);
