@@ -41,6 +41,22 @@ var YUI_config = {
         'country-code-drop-down' : { // uses custom-drop-down-controller & custom-drop-down-markup
           fullpath: '../js/custom-drop-down-country-code/country-code-drop-down.js'
         },
+        // custom drop down country code css
+        'country-drop-down-ltr-css' : {
+          fullpath: '../css/country-drop-down-ltr.css',
+          type : 'css'
+        },
+        'country-drop-down-rtl-css' : {
+          fullpath: '../css/country-drop-down-rtl.css',
+          type : 'css'
+        },
+        // custom drop down country
+        'country-drop-down-markup' : {
+          fullpath: '../js/custom-drop-down-country/country-drop-down-markup.js'
+        },
+        'country-drop-down' : { // uses custom-drop-down-controller & custom-drop-down-markup
+          fullpath: '../js/custom-drop-down-country/country-drop-down.js'
+        },
         // input data formatter
         'input-data-formatter' : {
           fullpath: '../js/input-data-modifier/input-data-formatter.js'

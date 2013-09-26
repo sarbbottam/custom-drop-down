@@ -14,7 +14,7 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
     this.customDropDownStyleUpdater = config.customDropDownStyleUpdater;
     this.customDropDownIndex = config.customDropDownIndex;
 
-    this.correspondingNodePlaceholder = this.correspondingNode.get('parentNode').one('.placeholder');
+    this.correspondingNodePlaceholder = this.correspondingNode?this.correspondingNode.get('parentNode').one('.placeholder'):null;
 
     this.selectedIndex = this.selectNode.get('selectedIndex') === -1?0:this.selectNode.get('selectedIndex');
 
@@ -108,8 +108,12 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
       // hide availableOptionsContainerNode
       _this.availableOptionsContainerNode.setStyle('display', 'none');
 
-      // focus correspondingNode
-      _this.correspondingNode && _this.correspondingNode.focus();
+      // focus correspondingNode if present or the selectedNode
+      if(_this.correspondingNode) {
+        _this.correspondingNode.focus();
+      } else {
+        _this.selectedOptionNode.one('a').focus();
+      }
 
     },
 
@@ -119,6 +123,14 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
 
     unHighlightCorrespondingNode : function(e, _this){
       _this.correspondingNode.removeClass('highlight-border');
+    },
+
+    highlightSelectedOptionNode : function(e, _this){
+      _this.selectedOptionNode.one('a').addClass('highlight-border');
+    },
+
+    unHighlightSelectedOptionNode : function(e, _this){
+      _this.selectedOptionNode.one('a').removeClass('highlight-border');
     },
 
     init : function() {
@@ -179,6 +191,18 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
 
         // remove highlight border
         this.correspondingNode.on('blur', this.unHighlightCorrespondingNode, null, _this);
+      } else {
+        // menu item focus handler
+        this.availableOptionsContainerNode.all('a').on('focus', this.highlightSelectedOptionNode, null, _this);
+
+        // menu item blur handler
+        this.availableOptionsContainerNode.all('a').on('blur', this.unHighlightSelectedOptionNode, null, _this);
+
+        // add highlight border
+        this.selectedOptionNode.one('a').on('focus', this.highlightSelectedOptionNode, null, _this);
+
+        // remove highlight border
+        this.selectedOptionNode.one('a').on('blur', this.unHighlightSelectedOptionNode, null, _this);
       }
 
     }

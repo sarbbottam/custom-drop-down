@@ -10,7 +10,7 @@ YUI.add('custom-drop-down-style-updater', function(Y) {
     this.ie8HeightOffset = config.ie8HeightOffset;
     this.ie8AboveHeightOffset = config.ie8AboveHeightOffset;
 
-    this.correspondingNodePlaceholder = this.correspondingNode.get('parentNode').one('.placeholder');
+    this.correspondingNodePlaceholder = this.correspondingNode?this.correspondingNode.get('parentNode').one('.placeholder'):null;
 
     this.menuHeight = '';
   };

@@ -64,15 +64,17 @@ YUI.add('input-data-formatter', function(Y) {
       var correspondingNode, selectedIndex, dataFormat;
 
       correspondingNode = Y.one('#'+target.getAttribute('corresponding-field-id'));
-      selectedIndex = target.get('selectedIndex') === -1?0:target.get('selectedIndex');
-      dataFormat = target.all('option').item(selectedIndex).getAttribute('corresponding-field-data-format');
+      if(correspondingNode) {
+        selectedIndex = target.get('selectedIndex') === -1?0:target.get('selectedIndex');
+        dataFormat = target.all('option').item(selectedIndex).getAttribute('corresponding-field-data-format');
 
-      if(dataFormat) {
-        correspondingNode.setAttribute('data-format', dataFormat);
-      } else {
-        correspondingNode.setAttribute('data-format', '');
+        if(dataFormat) {
+          correspondingNode.setAttribute('data-format', dataFormat);
+        } else {
+          correspondingNode.setAttribute('data-format', '');
+        }
+        this.formatter(correspondingNode);
       }
-      this.formatter(correspondingNode);
     }
 
   }, true);
