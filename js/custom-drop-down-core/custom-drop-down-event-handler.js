@@ -57,7 +57,12 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
                 _this.customDropDownStyleUpdater.highlightMenu(_this.selectedIndex);
                 break;
         case 9:
-                _this.correspondingNode.focus();
+                // focus correspondingNode if present or the selectedNode
+                if(_this.correspondingNode) {
+                  _this.correspondingNode.focus();
+                } else {
+                  _this.selectedOptionNode.one('a').focus();
+                }
                 _this.availableOptionsContainerNode.setStyle('display', 'none');
                 break;
         case 27:
@@ -152,8 +157,10 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
 
       // hot keypress handler
       this.selectedOptionNode.on('keypress', function(e) {
-        _this.selectedOptionNodeEventHandler(e, _this);
-        _this.availableOptionsHotKeypressHandler(e, _this);
+        if(e.keyCode !== 9) {
+          _this.selectedOptionNodeEventHandler(e, _this);
+          _this.availableOptionsHotKeypressHandler(e, _this);
+        }
       });
 
       // hot keypress handler
