@@ -25,6 +25,15 @@ var YUI_config = {
           fullpath: '../js/custom-drop-down-core/custom-drop-down-controller.js',
           requires: ['node', 'custom-drop-down-style-updater', 'custom-drop-down-event-handler', 'custom-drop-down-index']
         },
+        // custom drop down country code css
+        'country-code-drop-down-ltr-css' : {
+          fullpath: '../css/country-code-drop-down-ltr.css',
+          type : 'css'
+        },
+        'country-code-drop-down-rtl-css' : {
+          fullpath: '../css/country-code-drop-down-rtl.css',
+          type : 'css'
+        },
         // custom drop down country code
         'country-code-drop-down-markup' : {
           fullpath: '../js/custom-drop-down-country-code/country-code-drop-down-markup.js'
