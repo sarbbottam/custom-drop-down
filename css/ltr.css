@@ -234,3 +234,53 @@ body {
   vertical-align: bottom;
   cursor: pointer;
 }
+
+/* line 4, ../scss/form-fields/_form-fields-lt-ie8.scss */
+.lt-ie8 #mandatory-mobile,
+.lt-ie8 #optional-mobile,
+.lt-ie8 #mandatory-country-code-select,
+.lt-ie8 #optional-country-code-select {
+  font-size: 1.2em;
+  color: #000;
+  padding: 0.55556em;
+  border: 1px solid #ececec;
+}
+/* line 9, ../scss/form-fields/_form-fields-lt-ie8.scss */
+.lt-ie8 #mandatory-mobile:hover,
+.lt-ie8 #optional-mobile:hover,
+.lt-ie8 #mandatory-country-code-select:hover,
+.lt-ie8 #optional-country-code-select:hover {
+  border: 1px solid #5771ff !important;
+}
+
+/* line 15, ../scss/form-fields/_form-fields-lt-ie8.scss */
+.lt-ie8 #mandatory-mobile,
+.lt-ie8 #optional-mobile {
+  width: 29.27778em;
+}
+
+/* line 20, ../scss/form-fields/_form-fields-lt-ie8.scss */
+.lt-ie8 #mandatory-country-code-select,
+.lt-ie8 #optional-country-code-select {
+  width: 30.5em;
+}
+
+/* line 1, ../scss/form-fields/_placeholder.scss */
+::-webkit-input-placeholder {
+  color: #a5a5a5;
+  text-transform: none;
+}
+
+/* line 7, ../scss/form-fields/_placeholder.scss */
+input[type='text']:-ms-input-placeholder,
+input[type='password']:-ms-input-placeholder {
+  color: #a5a5a5;
+  text-transform: none;
+}
+
+/* line 12, ../scss/form-fields/_placeholder.scss */
+::-moz-placeholder {
+  color: #a5a5a5;
+  text-transform: none;
+  opacity: 1;
+}

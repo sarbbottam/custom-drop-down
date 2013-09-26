@@ -27,3 +27,6 @@
   vertical-align: bottom; // required for firefox
   cursor: pointer;
 }
+
+@import "form-fields-lt-ie8";
+@import "placeholder";

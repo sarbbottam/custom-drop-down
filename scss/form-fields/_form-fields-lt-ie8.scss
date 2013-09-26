@@ -1,0 +1,22 @@
+.lt-ie8 #mandatory-mobile,
+.lt-ie8 #optional-mobile,
+.lt-ie8 #mandatory-country-code-select,
+.lt-ie8 #optional-country-code-select {
+  font-size: $form_fields_font_size/$base_font_size+em;
+  color: #000;
+  padding: $form_fields_padding/$form_fields_font_size +em;
+  border: $form_fields_border;
+  &:hover{
+    border: $highlight_border;
+  }
+}
+
+.lt-ie8 #mandatory-mobile,
+.lt-ie8 #optional-mobile {
+  width: 527/$form_fields_font_size +em;
+}
+
+.lt-ie8 #mandatory-country-code-select,
+.lt-ie8 #optional-country-code-select {
+  width: 549/$form_fields_font_size +em;
+}
