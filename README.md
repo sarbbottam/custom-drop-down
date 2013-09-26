@@ -18,7 +18,7 @@
 * There are issues in auto formatting when being edited in between
 * <del> Demo of other custom drop downs </del>
 * Refactor the SCSS
-* Might of scope to refcator the core code.
+* Might have scope to refcator the core code.
 * <del> Lazy load css reated to custom drop down only when the module loads </del>
 
 #### Please log any issues found.
