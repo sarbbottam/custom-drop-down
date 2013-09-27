@@ -36,7 +36,7 @@ YUI.add('country-drop-down-markup', function(Y) {
             selectedOptionHTML.push('"></span>&nbsp;&nbsp;');
             selectedOptionHTML.push('<span id="'+ this.selectedOptionAriaLabeledById +'" class="clipped">'+ optionNodes.item(selectedIndex).get('innerHTML')+'</span>');
             selectedOptionHTML.push(optionNodes.item(selectedIndex).get('value'));
-            selectedOptionHTML.push('<span class="country-code-arrow-container"><span class="country-code-arrow"></span></span>');
+            selectedOptionHTML.push('<span class="country-arrow-container"><span class="country-arrow"></span></span>');
 
           selectedOptionHTML.push('</a>');
         selectedOptionHTML.push('</div>');
@@ -101,7 +101,7 @@ YUI.add('country-drop-down-markup', function(Y) {
         html.push('"></span>&nbsp;&nbsp;');
         html.push('<span id="'+ this.selectedOptionAriaLabeledById +'" class="clipped"></span>');
         html.push(optionText);
-        html.push('<span class="country-code-arrow-container"><span class="country-code-arrow"></span></span>');
+        html.push('<span class="country-arrow-container"><span class="country-arrow"></span></span>');
 
         return html.join('');
       }

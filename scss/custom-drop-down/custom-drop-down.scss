@@ -1,0 +1,9 @@
+@import "config";
+
+.highlight-border {
+  border: $highlight_border;
+}
+
+.highlight-background {
+  background-color : $highlight_background_color;
+}

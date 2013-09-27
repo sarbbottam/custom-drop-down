@@ -1,0 +1,14 @@
+/* containers */
+/* highlight */
+/* form fields */
+/* buttons */
+/* texts */
+/* line 3, ../../scss/custom-drop-down/custom-drop-down.scss */
+.highlight-border {
+  border: 1px solid #5771ff !important;
+}
+
+/* line 7, ../../scss/custom-drop-down/custom-drop-down.scss */
+.highlight-background {
+  background-color: #f6fbff !important;
+}

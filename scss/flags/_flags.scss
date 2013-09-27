@@ -1,11 +1,4 @@
-.fl-wrapper {
-  width: 26px;
-  @if $direction == 'ltr' {
-    padding-right: 10px;
-  } @else {
-    padding-left: 10px;
-  }
-}
+@import "config";
 
 [class^="flag"] {
   display: inline-block;
