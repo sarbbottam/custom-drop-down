@@ -7,6 +7,10 @@
   margin-top: 6/$base_font_size+em;
 }
 
+.button-row {
+  margin-top: 30/$base_font_size+em;
+}
+
 .column {
   position: relative;
   @include inline-block;
