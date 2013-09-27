@@ -1,8 +1,9 @@
 YUI.add('country-drop-down', function(Y) {
 
   if (Y.one('html').hasClass('modern')) {
-    var countryDropDownCss, flagsCss;
+    var customDropDownCss, countryDropDownCss, flagsCss;
 
+    customDropDownCss = 'custom-drop-down-css';
     if(Y.one('body').getStyle('direction') === 'ltr') {
         countryDropDownCss = 'country-drop-down-ltr-css';
         flagsCss = 'flags-ltr-css';
@@ -10,7 +11,7 @@ YUI.add('country-drop-down', function(Y) {
         countryDropDownCss = 'country-drop-down-rtl-css';
         flagsCss = 'flags-rtl-css';
     }
-    Y.use('custom-drop-down-controller', 'country-drop-down-markup', countryDropDownCss, flagsCss, function(Y){
+    Y.use('custom-drop-down-controller', 'country-drop-down-markup', customDropDownCss, countryDropDownCss, flagsCss, function(Y){
 
       Y.all('[custom-drop-down-type=country]').each(function(target) {
         var CustomDropDownMarkup = Y.CustomDropDownMenu.CountryDropDownMarkup,
