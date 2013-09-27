@@ -1,15 +1,14 @@
 {
-  "name": "country-code-dropdown",
+  "name": "custom-drop-down",
   "version": "0.0.1",
-  "description": "custom country code dropdown",
-  "main": "html/country-code-dropdown.html",
+  "description": "custom-drop-down",
+  "main": "html/custom-drop-down.html",
   "repository": {
     "type": "git",
-    "url": "git@git.corp.yahoo.com:sarbbo/membership-frontend.git"
+    "url": "git@github.com:sarbbottam/custom-drop-down.git"
   },
   "keywords": [
-    "membership",
-    "frontend"
+    "custom-drop-down.html"
   ],
   "author": "Sarbbottam Bandyopadhyay",
   "readmeFilename": "README.md",
