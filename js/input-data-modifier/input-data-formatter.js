@@ -11,28 +11,51 @@ YUI.add('input-data-formatter', function(Y) {
 
   Y.mix(InputDataFormatter.prototype, {
 
-    keyupHandler : function(e, separatorIndex, separator){
-      var cursorPosition = this.get('selectionStart');
-      if(e.keyCode > 47 && e.keyCode < 58) {
-        var formattedValue = this.get('value'),
-          formattedValueLength = formattedValue.length,
-          formattedValueArray = formattedValue.split('');
+    getSepatarorPattern : function(separator) {
+      var separatorPattern = '(';
+      for ( var index in separator ){
+        if(index > 0) {
+          separatorPattern = separatorPattern + '|';
+        }
+        separatorPattern = separatorPattern + '\\' + separator[index];
+      }
+      separatorPattern = separatorPattern + ')';
+      return separatorPattern;
+    },
 
+    keypressHandler : function(e, separatorIndex, separator, separatorPattern){
+      var cursorPosition = this.get('selectionStart'),
+        value = this.get('value'),
+        valueLength = value.length,
+        unFormattedValue = value.replace(separatorPattern, ''),
+        unFormattedValueArray = unFormattedValue.split(''),
+        autoFormatEnabled = true;
+
+      autoFormatEnabled = Y.Array.indexOf([8, 37, 38, 39, 40], e.keyCode) === -1? true: false;
+
+      if(autoFormatEnabled) {
         for( var i = 0, l = separatorIndex.length; i < l; i+=1 ) {
-          if(separatorIndex[i] <= formattedValueLength && formattedValue.charAt(separatorIndex[i]) !== separator[i]) {
-            formattedValueArray.splice(separatorIndex[i], 0, separator[i]);
-            cursorPosition++;
-            if(separator[i+1] === ' ') {
-              formattedValueArray.splice(separatorIndex[i+1], 0, separator[i+1]);
-              i+=1;
+          if(separatorIndex[i] <= valueLength) {
+
+            if(unFormattedValueArray.length >= separatorIndex[i]) {
+              unFormattedValueArray.splice(separatorIndex[i], 0, separator[i]);
             }
+
+            if(cursorPosition >= valueLength) {
+              cursorPosition++;
+            }
+
+            if(cursorPosition === separatorIndex[i] && e.keyCode !== 8) {
+              cursorPosition++;
+            }
+
             continue;
           }
         }
-        this.set('value', formattedValueArray.join(''));
+        this.set('value', unFormattedValueArray.join(''));
+        this.set('selectionStart', cursorPosition);
+        this.set('selectionEnd', cursorPosition);
       }
-      this.set('selectionStart', cursorPosition);
-      this.set('selectionEnd', cursorPosition);
     },
 
     formatter : function(target) {
@@ -43,7 +66,7 @@ YUI.add('input-data-formatter', function(Y) {
         separatorIndex = [],
         currentSeparatorIndex = -1;
 
-      target.detach('keyup', this.keyupHandler);
+      target.detach('keypress', this.keypressHandler);
 
       if(formatLength) {
         target.setAttribute('maxlength', formatLength);
@@ -52,11 +75,11 @@ YUI.add('input-data-formatter', function(Y) {
           currentSeparatorIndex = format.indexOf(separator[i], currentSeparatorIndex+1);
           separatorIndex.push(currentSeparatorIndex);
         }
-        target.on('keyup', this.keyupHandler, null, separatorIndex, separator);
+        target.on('keypress', this.keypressHandler, null, separatorIndex, separator, new RegExp(this.getSepatarorPattern(separator), 'g'));
       }
       if(value !== '') {
         target.set('value', value.replace(/[^\d]/g, ''));
-        this.keyupHandler.call(target, {keyCode: 48}, separatorIndex, separator);
+        this.keypressHandler.call(target, {}, separatorIndex, separator, new RegExp(this.getSepatarorPattern(separator), 'g'));
       }
     },
 
