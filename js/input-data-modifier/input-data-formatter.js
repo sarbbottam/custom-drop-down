@@ -24,7 +24,7 @@ YUI.add('input-data-formatter', function(Y) {
     },
 
     keypressHandler : function(e, separatorIndex, separator, separatorPattern){
-      var cursorPosition = this.get('selectionStart'),
+      var caretIndex = this.get('selectionStart'),
         value = this.get('value'),
         valueLength = value.length,
         unFormattedValue = value.replace(separatorPattern, ''),
@@ -41,20 +41,22 @@ YUI.add('input-data-formatter', function(Y) {
               unFormattedValueArray.splice(separatorIndex[i], 0, separator[i]);
             }
 
-            if(cursorPosition >= valueLength) {
-              cursorPosition++;
+            if(caretIndex >= valueLength) {
+              caretIndex++;
             }
 
-            if(cursorPosition === separatorIndex[i] && e.keyCode !== 8) {
-              cursorPosition++;
+            if(caretIndex === separatorIndex[i] && e.keyCode !== 8) {
+              caretIndex++;
             }
 
             continue;
           }
         }
         this.set('value', unFormattedValueArray.join(''));
-        this.set('selectionStart', cursorPosition);
-        this.set('selectionEnd', cursorPosition);
+        if(e.type) {
+          this.set('selectionStart', caretIndex);
+          this.set('selectionEnd', caretIndex);
+        }
       }
     },
 
