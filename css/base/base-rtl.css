@@ -105,6 +105,15 @@ legend {
 }
 
 /* line 7, ../../scss/common/_common.scss */
+.no-js .clipped {
+  margin: 15px 0 5px;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 400;
+  color: #343D47;
+}
+
+/* line 15, ../../scss/common/_common.scss */
 .clear {
   clear: both;
 }
