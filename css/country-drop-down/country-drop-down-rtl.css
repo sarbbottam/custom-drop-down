@@ -5,81 +5,26 @@
 /* texts */
 /* line 1, ../../scss/country-drop-down/_country-drop-down.scss */
 .selected-country {
-  position: absolute;
-  font-size: 1.2em;
-  top: 1px;
-  right: 0 !important;
   width: 100%;
 }
-/* line 11, ../../scss/country-drop-down/_country-drop-down.scss */
+/* line 3, ../../scss/country-drop-down/_country-drop-down.scss */
 .selected-country > a {
-  color: #000;
-  padding: 0.55556em;
-  display: inline-block;
-  width: 100%;
   border-radius: 4px;
   border: 1px solid #ececec;
 }
-/* line 18, ../../scss/country-drop-down/_country-drop-down.scss */
+/* line 6, ../../scss/country-drop-down/_country-drop-down.scss */
 .selected-country > a:focus {
-  outline: none;
-  background-color: #f6fbff;
   border: 1px solid #5771ff !important;
 }
 
-/* line 26, ../../scss/country-drop-down/_country-drop-down.scss */
+/* line 12, ../../scss/country-drop-down/_country-drop-down.scss */
 .country-arrow-container {
-  display: inline-block;
   position: absolute;
-  width: 15px;
   top: 15px;
   left: 5px;
 }
 
-/* line 38, ../../scss/country-drop-down/_country-drop-down.scss */
-.country-arrow {
-  display: inline-block;
-  border: 5px solid transparent;
-  border-top: 5px solid black;
-}
-
-/* line 44, ../../scss/country-drop-down/_country-drop-down.scss */
+/* line 22, ../../scss/country-drop-down/_country-drop-down.scss */
 .countries-container {
-  height: 8.88889em;
   width: 100%;
-  overflow-y: scroll;
-  position: absolute;
-  display: none;
-  top: 40px !important;
-  background: #fff;
-  z-index: 200;
-  border: 1px solid #5771ff !important;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-}
-/* line 56, ../../scss/country-drop-down/_country-drop-down.scss */
-.countries-container li {
-  font-size: 1em;
-  color: #a5a5a5;
-  width: 100%;
-}
-/* line 61, ../../scss/country-drop-down/_country-drop-down.scss */
-.countries-container a {
-  color: #767676;
-  padding: 0.27778em 0.55556em;
-  display: inline-block;
-  width: 100%;
-  border-radius: 0;
-}
-/* line 67, ../../scss/country-drop-down/_country-drop-down.scss */
-.countries-container a:focus, .countries-container a:hover {
-  outline: none;
-  background-color: #5771ff;
-  color: #fff;
-}
-
-/* line 76, ../../scss/country-drop-down/_country-drop-down.scss */
-.country-highlight {
-  background-color: #5771ff;
-  color: #fff;
 }
