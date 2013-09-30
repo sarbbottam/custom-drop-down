@@ -122,24 +122,8 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
 
     },
 
-    highlightCorrespondingNode : function(e, _this){
-      _this.correspondingNode.addClass('highlight-border');
-    },
-
-    unHighlightCorrespondingNode : function(e, _this){
-      _this.correspondingNode.removeClass('highlight-border');
-    },
-
-    highlightSelectedOptionNode : function(e, _this){
-      _this.selectedOptionNode.one('a').addClass('highlight-border');
-    },
-
-    unHighlightSelectedOptionNode : function(e, _this){
-      _this.selectedOptionNode.one('a').removeClass('highlight-border');
-    },
-
     init : function() {
-      var _this = this, selectedIndex;
+      var _this = this, selectedIndex, desiredNode;
 
       // click/enter handler on selectedOptionNode
       this.selectedOptionNode.on('click', this.selectedOptionNodeEventHandler, null, _this);
@@ -184,33 +168,23 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
       }, null, _this);
 
       if (_this.correspondingNode) {
-        // menu item focus handler
-        this.availableOptionsContainerNode.all('a').on('focus', this.highlightCorrespondingNode, null, _this);
-
-        // menu item blur handler
-        this.availableOptionsContainerNode.all('a').on('blur', this.unHighlightCorrespondingNode, null, _this);
-
-        // add highlight border
-        this.selectedOptionNode.one('a').on('focus', this.highlightCorrespondingNode, null, _this);
-
+        desiredNode = _this.correspondingNode;
         // remove highlight border
-        this.selectedOptionNode.one('a').on('blur', this.unHighlightCorrespondingNode, null, _this);
-
-        // remove highlight border
-        this.correspondingNode.on('blur', this.unHighlightCorrespondingNode, null, _this);
+        this.correspondingNode.on('blur', this.customDropDownStyleUpdater.unHighlightDesiredNodeBorder, null, desiredNode);
       } else {
-        // menu item focus handler
-        this.availableOptionsContainerNode.all('a').on('focus', this.highlightSelectedOptionNode, null, _this);
-
-        // menu item blur handler
-        this.availableOptionsContainerNode.all('a').on('blur', this.unHighlightSelectedOptionNode, null, _this);
-
-        // add highlight border
-        this.selectedOptionNode.one('a').on('focus', this.highlightSelectedOptionNode, null, _this);
-
-        // remove highlight border
-        this.selectedOptionNode.one('a').on('blur', this.unHighlightSelectedOptionNode, null, _this);
+        desiredNode = _this.selectedOptionNode.one('a');
       }
+      // menu item focus handler
+      this.availableOptionsContainerNode.all('a').on('focus', this.customDropDownStyleUpdater.highlightDesiredNodeBorder, null, desiredNode);
+
+      // menu item blur handler
+      this.availableOptionsContainerNode.all('a').on('blur', this.customDropDownStyleUpdater.unHighlightDesiredNodeBorder, null, desiredNode);
+
+      // add highlight border
+      this.selectedOptionNode.one('a').on('focus', this.customDropDownStyleUpdater.highlightDesiredNodeBorder, null, desiredNode);
+
+      // remove highlight border
+      this.selectedOptionNode.one('a').on('blur', this.customDropDownStyleUpdater.unHighlightDesiredNodeBorder, null, desiredNode);
 
     }
 

@@ -48,6 +48,14 @@ YUI.add('custom-drop-down-style-updater', function(Y) {
 
       this.availableOptionsContainerNode.all('ul li').item(selectedIndex).one('a').focus();
       this.availableOptionsContainerNode.set('scrollTop', this.menuHeight * selectedIndex);
+    },
+
+    highlightDesiredNodeBorder : function(e, desiredNode){
+      desiredNode.addClass('highlight-border');
+    },
+
+    unHighlightDesiredNodeBorder : function(e, desiredNode){
+      desiredNode.removeClass('highlight-border');
     }
 
   }, true);
