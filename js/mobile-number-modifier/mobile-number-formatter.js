@@ -12,9 +12,9 @@ YUI.add('mobile-number-formatter', function(Y) {
       inputDataFormatter.updateFormat(target);
     });
 
-    Y.on('option-changed', function(e, target ){
-      inputDataFormatter.updateFormat(target);
-    });
+    Y.on('change', function(e, target ) {
+      inputDataFormatter.updateFormat(e.target);
+    }, '[custom-drop-down-type=country-code]');
 
   });
 

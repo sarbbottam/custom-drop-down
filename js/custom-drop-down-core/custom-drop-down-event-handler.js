@@ -105,7 +105,9 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
 
         // update corresponding select/option. and fire change event
         _this.selectNode.set('selectedIndex', selectedIndex);
-        Y.fire('option-changed', null, _this.selectNode);
+        //Y.fire('option-changed', null, _this.selectNode);
+
+        _this.selectNode.simulate('change');
 
         Y.one('#' + _this.selectedOptionAriaLabeledById).set('innerHTML',_this.optionNodes.item(selectedIndex).get('innerHTML'));
       }
@@ -194,4 +196,4 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
 
   Y.CustomDropDownMenu.CustomDropDownEventHandler = CustomDropDownEventHandler;
 
-}, {requires : ['node']});
+}, {requires : ['node', 'node-event-simulate']});

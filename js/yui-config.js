@@ -1,5 +1,5 @@
 var YUI_config = {
-  //combine: true,
+  combine: true,
   groups: {
     app: {
       'modules': {
@@ -33,7 +33,7 @@ var YUI_config = {
         },
         'custom-drop-down-event-handler' : {
           fullpath: '../js/custom-drop-down-core/custom-drop-down-event-handler.js',
-          requires: ['node']
+          requires: ['node', 'node-event-simulate']
         },
         'custom-drop-down-controller' : {
           fullpath: '../js/custom-drop-down-core/custom-drop-down-controller.js',
