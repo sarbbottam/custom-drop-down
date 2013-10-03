@@ -74,7 +74,7 @@
   border-radius: 0;
 }
 /* line 63, ../../scss/custom-drop-down/custom-drop-down.scss */
-.available-options-container li a:focus, .available-options-container li a:hover {
+.available-options-container li a:focus {
   outline: none;
   background-color: #5771ff;
   color: #fff;
