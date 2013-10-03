@@ -70,6 +70,7 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
                 _this.availableOptionsContainerNode.setStyle('display', 'none');
                 break;
       }
+      _this.availableOptionsContainerNode.detach('mouseover', _this.availableOptionsMouseoverHandler, null, _this);
     },
 
     availableOptionsHotKeypressHandler : function(e, _this) {
@@ -89,6 +90,19 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
         _this.selectedIndex = desiredOptionIndex;
         _this.customDropDownStyleUpdater.highlightMenu(_this.selectedIndex);
       }
+      _this.availableOptionsContainerNode.detach('mouseover', _this.availableOptionsMouseoverHandler, null, _this);//_this.availableOptionsContainerNode.on('mousemove', _this.attachAvailableOptionsMouseoverHandler, null, _this);
+    },
+
+    // focus the selected country code on mouse over
+    availableOptionsMouseoverHandler : function(e, _this) {
+      e.halt();
+      e.target.focus();
+      _this.selectedIndex = _this.availableOptionsContainerNode.all('li').indexOf(e.target.get('parentNode'));
+      _this.availableOptionsContainerNode.detach('mouseover', _this.attachAvailableOptionsMouseoverHandler);
+    },
+
+    attachAvailableOptionsMouseoverHandler : function(e, _this) {
+      _this.availableOptionsContainerNode.on('mouseover', _this.availableOptionsMouseoverHandler, null, _this);
     },
 
     selectOption : function(e, _this){
@@ -152,12 +166,8 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
       // hot keypress handler
       this.availableOptionsContainerNode.on('keypress', this.availableOptionsHotKeypressHandler, null, _this);
 
-      // focus the selected country code on mouse over
-      this.availableOptionsContainerNode.on('mouseover', function(e, _this){
-        e.halt();
-        e.target.focus();
-        _this.selectedIndex = _this.availableOptionsContainerNode.all('li').indexOf(e.target.get('parentNode'));
-      }, null, _this);
+      // attach mouseover handler
+      this.availableOptionsContainerNode.on('mousemove', this.attachAvailableOptionsMouseoverHandler, null, _this);
 
       this.availableOptionsContainerNode.all('li a').on('click', this.selectOption, null, _this);
 
