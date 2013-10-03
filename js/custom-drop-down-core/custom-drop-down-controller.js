@@ -4,9 +4,9 @@ YUI.add('custom-drop-down-controller', function(Y) {
 
   CustomDropDownController = function(config) {
     this.target = config.target;
-    this.ie9WidthOffset = config.ie9WidthOffset;
-    this.ie8HeightOffset = config.ie8HeightOffset;
-    this.ie8AboveHeightOffset = config.ie8AboveHeightOffset;
+    this.ie9WidthOffset = config.ie9WidthOffset || 0;
+    this.ie8HeightOffset = config.ie8HeightOffset || 0;
+    this.ie8AboveHeightOffset = config.ie8AboveHeightOffset || 0;
     this.CustomDropDownMarkup = config.CustomDropDownMarkup;
 
     this.CustomDropDownStyleUpdater = Y.CustomDropDownMenu.CustomDropDownStyleUpdater;
