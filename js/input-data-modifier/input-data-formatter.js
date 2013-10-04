@@ -23,15 +23,27 @@ YUI.add('input-data-formatter', function(Y) {
       return separatorPattern;
     },
 
-    keypressHandler : function(e, separatorIndex, separator, separatorPattern){
+    applyFormat : function(e, separatorIndex, separator, separatorPattern){
       var caretIndex = this.get('selectionStart'),
         value = this.get('value'),
         valueLength = value.length,
         unFormattedValue = value.replace(separatorPattern, ''),
         unFormattedValueArray = unFormattedValue.split(''),
-        autoFormatEnabled = true;
+        autoFormatEnabled = true,
+        lastCharTyped = value.charAt(caretIndex -1),
+        lastCharIsSeparator = Y.Array.indexOf(separator, lastCharTyped) !== -1? true : false;
 
-      autoFormatEnabled = Y.Array.indexOf([8, 37, 38, 39, 40], e.keyCode) === -1? true: false;
+      if(e.keyCode) {
+        if(e.keyCode >= 48 && e.keyCode <= 90) {
+          autoFormatEnabled = true;
+        } else {
+          if(lastCharIsSeparator) {
+            autoFormatEnabled = true;
+          } else {
+            autoFormatEnabled = false;
+          }
+        }
+      }
 
       if(autoFormatEnabled) {
         for( var i = 0, l = separatorIndex.length; i < l; i+=1 ) {
@@ -44,8 +56,7 @@ YUI.add('input-data-formatter', function(Y) {
             if(caretIndex >= valueLength) {
               caretIndex++;
             }
-
-            if(caretIndex === separatorIndex[i] && e.keyCode !== 8) {
+            if(caretIndex === separatorIndex[i] + 1 && e.keyCode !== 8 && !lastCharIsSeparator) {
               caretIndex++;
             }
 
@@ -68,7 +79,7 @@ YUI.add('input-data-formatter', function(Y) {
         separatorIndex = [],
         currentSeparatorIndex = -1;
 
-      target.detach('keypress', this.keypressHandler);
+      target.detach('keyup', this.applyFormat);
 
       if(formatLength) {
         target.setAttribute('maxlength', formatLength);
@@ -77,11 +88,11 @@ YUI.add('input-data-formatter', function(Y) {
           currentSeparatorIndex = format.indexOf(separator[i], currentSeparatorIndex+1);
           separatorIndex.push(currentSeparatorIndex);
         }
-        target.on('keypress', this.keypressHandler, null, separatorIndex, separator, new RegExp(this.getSepatarorPattern(separator), 'g'));
+        target.on('keyup', this.applyFormat, null, separatorIndex, separator, new RegExp(this.getSepatarorPattern(separator), 'g'));
       }
       if(value !== '') {
         target.set('value', value.replace(/[^\d]/g, ''));
-        this.keypressHandler.call(target, {}, separatorIndex, separator, new RegExp(this.getSepatarorPattern(separator), 'g'));
+        this.applyFormat.call(target, {}, separatorIndex, separator, new RegExp(this.getSepatarorPattern(separator), 'g'));
       }
     },
 
