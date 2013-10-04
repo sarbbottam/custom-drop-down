@@ -13,7 +13,7 @@ YUI.add('input-data-formatter', function(Y) {
 
     getSepatarorPattern : function(separator) {
       var separatorPattern = '(';
-      for ( var index in separator ){
+      for ( var index = 0, length = separator.length; index < length; index += 1 ) {
         if(index > 0) {
           separatorPattern = separatorPattern + '|';
         }
