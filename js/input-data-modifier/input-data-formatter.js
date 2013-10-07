@@ -108,7 +108,7 @@ YUI.add('input-data-formatter', function(Y) {
 
         if(dataFormat) {
           correspondingNode.setAttribute('data-format', dataFormat);
-          correspondingNode.setAttribute('maxlength', this.maxLength);
+          correspondingNode.setAttribute('maxlength', dataFormat.length);
         } else {
           correspondingNode.setAttribute('data-format', '');
           correspondingNode.setAttribute('maxlength', this.maxLength);
