@@ -2,7 +2,7 @@ YUI.add('mobile-number-formatter', function(Y) {
 
   Y.use('input-data-formatter', function(Y){
 
-    var inputDataFormatter = new Y.InputDataModifier.InputDataFormatter();
+    var inputDataFormatter = new Y.InputDataModifier.InputDataFormatter({maxLength: 15});
 
     Y.all('[data-format]').each(function(target) {
       inputDataFormatter.formatter(target);

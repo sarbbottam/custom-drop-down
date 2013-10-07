@@ -7,6 +7,8 @@ YUI.add('input-data-formatter', function(Y) {
       return InputDataFormatter.instance;
     }
     InputDataFormatter.instance = this;
+
+    this.maxLength = config.maxLength;
   };
 
   Y.mix(InputDataFormatter.prototype, {
@@ -31,7 +33,7 @@ YUI.add('input-data-formatter', function(Y) {
         unFormattedValueArray = unFormattedValue.split(''),
         autoFormatEnabled = true,
         lastCharTyped = value.charAt(caretIndex -1),
-        lastCharIsSeparator = Y.Array.indexOf(separator, lastCharTyped) !== -1? true : false;
+        lastCharIsSeparator = Y.Array.indexOf(separator, lastCharTyped) !== -1 && e.keyCode !== 8? true : false;
 
       if(e.keyCode) {
         if(e.keyCode >= 48 && e.keyCode <= 90) {
@@ -75,14 +77,14 @@ YUI.add('input-data-formatter', function(Y) {
       var value = target.get('value'),
         format = target.getAttribute('data-format'),
         formatLength = format.length,
-        separator = format.match(/[^X]/g),
+        separator = format.match(/[^X]/g) || [],
         separatorIndex = [],
         currentSeparatorIndex = -1;
 
       target.detach('keyup', this.applyFormat);
 
       if(formatLength) {
-        target.setAttribute('maxlength', formatLength);
+        //target.setAttribute('maxlength', formatLength);
 
         for(var i = 0, l = separator.length; i < l; i+=1) {
           currentSeparatorIndex = format.indexOf(separator[i], currentSeparatorIndex+1);
@@ -106,8 +108,10 @@ YUI.add('input-data-formatter', function(Y) {
 
         if(dataFormat) {
           correspondingNode.setAttribute('data-format', dataFormat);
+          correspondingNode.setAttribute('maxlength', this.maxLength);
         } else {
           correspondingNode.setAttribute('data-format', '');
+          correspondingNode.setAttribute('maxlength', this.maxLength);
         }
         this.formatter(correspondingNode);
       }
