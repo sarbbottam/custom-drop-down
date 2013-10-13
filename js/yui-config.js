@@ -9,12 +9,8 @@ var YUI_config = {
           requires: ['node']
         },
         // flags css
-        'flags-ltr-css' : {
-          fullpath: '../css/flags/flags-ltr.css',
-          type : 'css'
-        },
-        'flags-rtl-css' : {
-          fullpath: '../css/flags/flags-rtl.css',
+        'flags' : {
+          fullpath: '../css/flags/flags.css',
           type : 'css'
         },
         // custom drop down core css
@@ -42,11 +38,13 @@ var YUI_config = {
         // custom drop down country code css
         'country-code-drop-down-ltr-css' : {
           fullpath: '../css/country-code-drop-down/country-code-drop-down-ltr.css',
-          type : 'css'
+          type : 'css',
+          requires : ['custom-drop-down-css', 'flags']
         },
         'country-code-drop-down-rtl-css' : {
           fullpath: '../css/country-code-drop-down/country-code-drop-down-rtl.css',
-          type : 'css'
+          type : 'css',
+          requires : ['custom-drop-down-css', 'flags']
         },
         // custom drop down country code
         'country-code-drop-down-markup' : {
@@ -58,11 +56,13 @@ var YUI_config = {
         // custom drop down country code css
         'country-drop-down-ltr-css' : {
           fullpath: '../css/country-drop-down/country-drop-down-ltr.css',
-          type : 'css'
+          type : 'css',
+          requires : ['custom-drop-down-css', 'flags']
         },
         'country-drop-down-rtl-css' : {
           fullpath: '../css/country-drop-down/country-drop-down-rtl.css',
-          type : 'css'
+          type : 'css',
+          requires : ['custom-drop-down-css', 'flags']
         },
         // custom drop down country
         'country-drop-down-markup' : {
