@@ -14,7 +14,10 @@ YUI.add('mobile-number-formatter', function(Y) {
 
     Y.on('change', function(e) {
       inputDataFormatter.updateFormat(e.target);
-      Y.one('#'+e.target.getAttribute('corresponding-field-id')).simulate("keyup", { charCode: 8 });
+      var correspondingField = Y.one('#'+e.target.getAttribute('corresponding-field-id'));
+      if(correspondingField.get('value') !== "") {
+        correspondingField.simulate("blur");
+      }
     }, '[custom-drop-down-type=country-code]');
 
   });
