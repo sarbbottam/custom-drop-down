@@ -7,12 +7,7 @@ YUI.add('custom-drop-down-style-updater', function(Y) {
     this.correspondingNode = config.referenceNodes.correspondingNode;
     this.availableOptionsContainerNode = config.referenceNodes.availableOptionsContainerNode;
 
-    this.ie8HeightOffset = config.ie8HeightOffset;
-    this.ie8AboveHeightOffset = config.ie8AboveHeightOffset;
-
     this.correspondingNodePlaceholder = this.correspondingNode?this.correspondingNode.get('parentNode').one('.placeholder'):null;
-
-    this.menuHeight = '';
   };
 
   Y.mix(CustomDropDownStyleUpdater.prototype, {
@@ -34,20 +29,10 @@ YUI.add('custom-drop-down-style-updater', function(Y) {
 
     highlightMenu : function(selectedIndex) {
 
-      // magic number is passed as configuration
-      if(!this.menuHeight) {
-        this.menuHeight = parseInt(this.availableOptionsContainerNode.one('ul li a').get('offsetHeight'), 0);
-        if(Y.UA.ie) {
-          if(Y.UA.ie === 8) {
-            this.menuHeight = this.menuHeight + this.ie8HeightOffset;
-          } else{
-            this.menuHeight = this.menuHeight + this.ie8AboveHeightOffset;
-          }
-        }
-      }
+      var selectedMenu = this.availableOptionsContainerNode.all('ul li').item(selectedIndex).one('a');
 
-      this.availableOptionsContainerNode.all('ul li').item(selectedIndex).one('a').focus();
-      this.availableOptionsContainerNode.set('scrollTop', this.menuHeight * selectedIndex);
+      selectedMenu.focus();
+      selectedMenu.scrollIntoView(true);
     },
 
     highlightDesiredNodeBorder : function(e, desiredNode){

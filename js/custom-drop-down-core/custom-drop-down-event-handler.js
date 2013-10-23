@@ -18,8 +18,6 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
 
     this.selectedIndex = this.selectNode.get('selectedIndex') === -1?0:this.selectNode.get('selectedIndex');
 
-    this.menuHeight = '';
-
     this.desiredOptionStartsWith = '';
     this.currentKeyPressTime = 0;
     this.previousKeyPressTime = 0;
@@ -82,7 +80,7 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
         _this.desiredOptionStartsWith = "";
       }
       _this.previousKeyPressTime = _this.currentKeyPressTime;
-      _this.desiredOptionStartsWith = _this.desiredOptionStartsWith + String.fromCharCode(e.keyCode);
+      _this.desiredOptionStartsWith = _this.desiredOptionStartsWith + String.fromCharCode(e.keyCode).toLowerCase();
       // do not update the selectedindex if desiredOptionIndex is -1
       // firefox/windows hack, firefox/windows listening to up/down/right/left arrow keypress
       desiredOptionIndex = _this.customDropDownIndex.getIndexOfDesiredOption(_this.desiredOptionStartsWith);

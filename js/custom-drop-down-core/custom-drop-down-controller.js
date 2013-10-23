@@ -5,8 +5,6 @@ YUI.add('custom-drop-down-controller', function(Y) {
   CustomDropDownController = function(config) {
     this.target = config.target;
     this.ie9WidthOffset = config.ie9WidthOffset || 0;
-    this.ie8HeightOffset = config.ie8HeightOffset || 0;
-    this.ie8AboveHeightOffset = config.ie8AboveHeightOffset || 0;
     this.CustomDropDownMarkup = config.CustomDropDownMarkup;
 
     this.CustomDropDownStyleUpdater = Y.CustomDropDownMenu.CustomDropDownStyleUpdater;
@@ -46,9 +44,7 @@ YUI.add('custom-drop-down-controller', function(Y) {
       this.referenceNodes = this.customDropDownMarkup.createAndInjectSelectedOptionHTML();
 
       this.customDropDownStyleUpdater = new this.CustomDropDownStyleUpdater({
-                                    referenceNodes : this.referenceNodes,
-                                    ie8HeightOffset : this.ie8HeightOffset,
-                                    ie8AboveHeightOffset : this.ie8AboveHeightOffset
+                                    referenceNodes : this.referenceNodes
                                   });
 
       // if correspondig node is present

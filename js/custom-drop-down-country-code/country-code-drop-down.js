@@ -15,8 +15,6 @@ YUI.add('country-code-drop-down', function(Y) {
           customDropDownController = new Y.CustomDropDownMenu.CustomDropDownController({
                                         target : target,
                                         ie9WidthOffset : 17,
-                                        ie8HeightOffset : -0.27,
-                                        ie8AboveHeightOffset : 0.42,
                                         CustomDropDownMarkup : CustomDropDownMarkup
                                       });
         customDropDownController.init();
