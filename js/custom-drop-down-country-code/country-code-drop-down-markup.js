@@ -28,7 +28,7 @@ YUI.add('country-code-drop-down-markup', function(Y) {
       var selectedOptionHTML = this.selectedOptionHTML,
         optionNodes = this.optionNodes,
         selectedIndex = this.selectedIndex;
-        selectedOptionHTML.push('<div id="'+ this.selectedOptionId +'" class="column selected-country-code selected-option">');
+        selectedOptionHTML.push('<div id="'+ this.selectedOptionId +'" class="column selected-country-code selected-option role="menu">');
           selectedOptionHTML.push('<a href="#'+ this.availableOptionsContainerId + '" role="menuitem" aria-haspopup="true" aria-labelledby="'+ this.selectedOptionAriaLabeledById +'" tabindex="0">');
 
             selectedOptionHTML.push('<span class="flag-');
@@ -61,9 +61,9 @@ YUI.add('country-code-drop-down-markup', function(Y) {
     createAndInjectAvailableOptionsHTML : function() {
       var availableOptionsHTML = this.availableOptionsHTML;
         availableOptionsHTML.push('<div class="country-codes-container available-options-container" id="'+ this.availableOptionsContainerId +'" style="width:'+ this.correspondingNodeWidth+'">');
-          availableOptionsHTML.push('<ul>');
+          availableOptionsHTML.push('<ul role="menu">');
             this.optionNodes.each(function(option) {
-              availableOptionsHTML.push('<li>');
+              availableOptionsHTML.push('<li role="presentation">');
                 availableOptionsHTML.push('<a href="#" role="menuitem" data-code="' + option.get('value') + '">');
                   availableOptionsHTML.push('<span class="flag-');
                   availableOptionsHTML.push(option.getAttribute('country-tld'));
