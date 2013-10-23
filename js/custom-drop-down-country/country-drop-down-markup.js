@@ -16,7 +16,7 @@ YUI.add('country-drop-down-markup', function(Y) {
 
     this.ie9WidthOffset = config.ie9WidthOffset;
 
-    this.correspondingNodeWidth = '';
+    this.selectNodeWidth = '';
     this.selectedOptionNode = '';
     this.availableOptionsContainerNode = '';
     this.selectedOptionHTML = [];
@@ -48,20 +48,18 @@ YUI.add('country-drop-down-markup', function(Y) {
         this.selectedOptionNode = Y.one('#' + this.selectedOptionId);
 
         // magic number is passed as configuration
-        // this.correspondingNodeWidth = this.correspondingNode.get('offsetWidth');
-
-        // if(Y.UA.ie === 9) {
-        //   this.correspondingNodeWidth = this.correspondingNodeWidth + this.ie9WidthOffset + 'px';
-        // } else {
-        //   this.correspondingNodeWidth = this.correspondingNodeWidth+ 'px';
-        // }
-
+        this.selectNodeWidth = this.selectNode.get('offsetWidth');
+        if(Y.UA.ie === 9) {
+          this.selectNodeWidth = this.selectNodeWidth + this.ie9WidthOffset + 'px';
+        } else {
+          this.selectNodeWidth = this.selectNodeWidth+ 'px';
+        }
         return this.createAndInjectAvailableOptionsHTML();
       },
 
     createAndInjectAvailableOptionsHTML : function() {
       var availableOptionsHTML = this.availableOptionsHTML;
-        availableOptionsHTML.push('<div class="countries-container available-options-container" id="'+ this.availableOptionsContainerId +'" style="width:'+ this.correspondingNodeWidth+'">');
+        availableOptionsHTML.push('<div class="countries-container available-options-container" id="'+ this.availableOptionsContainerId +'" style="width:'+ this.selectNodeWidth+'">');
           availableOptionsHTML.push('<ul>');
             this.optionNodes.each(function(option) {
               availableOptionsHTML.push('<li>');
