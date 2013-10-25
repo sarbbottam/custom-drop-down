@@ -28,8 +28,8 @@ YUI.add('country-code-drop-down-markup', function(Y) {
       var selectedOptionHTML = this.selectedOptionHTML,
         optionNodes = this.optionNodes,
         selectedIndex = this.selectedIndex;
-        selectedOptionHTML.push('<div id="'+ this.selectedOptionId +'" class="column selected-country-code selected-option role="menu">');
-          selectedOptionHTML.push('<a href="#'+ this.availableOptionsContainerId + '" role="menuitem" aria-haspopup="true" aria-labelledby="'+ this.selectedOptionAriaLabeledById +'" tabindex="0">');
+        selectedOptionHTML.push('<div id="'+ this.selectedOptionId +'" class="column selected-country-code selected-option">');
+          selectedOptionHTML.push('<a href="#'+ this.availableOptionsContainerId + '" role="button" aria-haspopup="true" aria-labelledby="'+ this.selectedOptionAriaLabeledById +'">');
 
             selectedOptionHTML.push('<span class="flag-');
             selectedOptionHTML.push(optionNodes.item(selectedIndex).getAttribute('country-tld'));
