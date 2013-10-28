@@ -49,11 +49,13 @@ YUI.add('country-drop-down-markup', function(Y) {
 
         // magic number is passed as configuration
         this.selectNodeWidth = this.selectNode.get('offsetWidth');
+
         if(Y.UA.ie === 9) {
           this.selectNodeWidth = this.selectNodeWidth + this.ie9WidthOffset + 'px';
         } else {
           this.selectNodeWidth = this.selectNodeWidth+ 'px';
         }
+
         return this.createAndInjectAvailableOptionsHTML();
       },
 
@@ -62,7 +64,7 @@ YUI.add('country-drop-down-markup', function(Y) {
         availableOptionsHTML.push('<div class="countries-container available-options-container" id="'+ this.availableOptionsContainerId +'" style="width:'+ this.selectNodeWidth+'">');
           availableOptionsHTML.push('<ul role="menu">');
             this.optionNodes.each(function(option) {
-              availableOptionsHTML.push('<li>');
+              availableOptionsHTML.push('<li role="presentation">');
                 availableOptionsHTML.push('<a href="#" role="menuitem" data-code="' + option.get('value') + '">');
                   availableOptionsHTML.push('<span class="flag-');
                   availableOptionsHTML.push(option.getAttribute('country-tld'));
@@ -79,6 +81,7 @@ YUI.add('country-drop-down-markup', function(Y) {
         this.selectedOptionNode.append(availableOptionsHTML);
 
         this.selectNode.setStyle('visibility', 'hidden');
+        this.selectNode.setAttribute('aria-hidden', true);
 
         this.availableOptionsContainerNode = Y.one('#' + this.availableOptionsContainerId);
         return {
