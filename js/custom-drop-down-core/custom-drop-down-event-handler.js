@@ -121,7 +121,8 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
 
         _this.selectNode.simulate('change');
 
-        Y.one('#' + _this.selectedOptionAriaLabeledById).set('innerHTML',_this.optionNodes.item(selectedIndex).get('innerHTML'));
+        //Y.one('#' + _this.selectedOptionAriaLabeledById).set('innerHTML',_this.optionNodes.item(selectedIndex).get('innerHTML'));
+        _this.selectedOptionNode.one('a').setAttribute('aria-label', _this.optionNodes.item(selectedIndex).get('innerHTML') + ' ' + _this.selectNode.getAttribute('aria-label'));
       }
 
       // hide availableOptionsContainerNode

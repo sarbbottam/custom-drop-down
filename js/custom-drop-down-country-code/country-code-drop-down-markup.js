@@ -21,6 +21,8 @@ YUI.add('country-code-drop-down-markup', function(Y) {
     this.availableOptionsContainerNode = '';
     this.selectedOptionHTML = [];
     this.availableOptionsHTML = [];
+
+    this.correspondingNodePlaceholder = this.correspondingNode?this.correspondingNode.get('parentNode').one('.placeholder'):null;
   };
 
   Y.mix(CountryCodeDropDownMarkup.prototype, {
@@ -29,12 +31,12 @@ YUI.add('country-code-drop-down-markup', function(Y) {
         optionNodes = this.optionNodes,
         selectedIndex = this.selectedIndex;
         selectedOptionHTML.push('<div id="'+ this.selectedOptionId +'" class="column selected-country-code selected-option">');
-          selectedOptionHTML.push('<a href="#'+ this.availableOptionsContainerId + '" role="button" aria-haspopup="true" aria-labelledby="'+ this.selectedOptionAriaLabeledById +'">');
-
+          //selectedOptionHTML.push('<a href="#'+ this.availableOptionsContainerId + '" role="button" aria-haspopup="true" aria-labelledby="'+ this.selectedOptionAriaLabeledById +'">');
+          selectedOptionHTML.push('<a href="#'+ this.availableOptionsContainerId + '" role="button" aria-haspopup="true" aria-label="'+ optionNodes.item(selectedIndex).get('innerHTML') + ' ' + this.selectNode.getAttribute('aria-label') +'">');
             selectedOptionHTML.push('<span class="flag-');
             selectedOptionHTML.push(optionNodes.item(selectedIndex).getAttribute('country-tld'));
             selectedOptionHTML.push('"></span>&nbsp;<span class="country-code-arrow-container drop-down-arrow-container"><span class="country-code-arrow drop-down-arrow"></span></span>&nbsp;');
-            selectedOptionHTML.push('<span id="'+ this.selectedOptionAriaLabeledById +'" class="clipped">'+ optionNodes.item(selectedIndex).get('innerHTML')+'</span>');
+            //selectedOptionHTML.push('<span id="'+ this.selectedOptionAriaLabeledById +'" class="clipped">'+ optionNodes.item(selectedIndex).get('innerHTML')+'</span>');
             selectedOptionHTML.push(optionNodes.item(selectedIndex).get('value'));
 
           selectedOptionHTML.push('</a>');
@@ -42,7 +44,11 @@ YUI.add('country-code-drop-down-markup', function(Y) {
 
         selectedOptionHTML = selectedOptionHTML.join('');
 
-        this.correspondingNode.get('parentNode').insertBefore(selectedOptionHTML, this.correspondingNode.get('parentNode').one('label'));
+        if(this.correspondingNodePlaceholder) {
+          this.correspondingNode.get('parentNode').insertBefore(selectedOptionHTML, this.correspondingNodePlaceholder);
+        } else {
+          this.correspondingNode.get('parentNode').insertBefore(selectedOptionHTML, this.correspondingNode);
+        }
 
         this.selectedOptionNode = Y.one('#' + this.selectedOptionId);
 

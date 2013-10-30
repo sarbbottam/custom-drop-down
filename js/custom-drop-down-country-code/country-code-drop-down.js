@@ -1,7 +1,7 @@
 YUI.add('country-code-drop-down', function(Y) {
 
   if (Y.one('html').hasClass('modern')) {
-    var countryDropDownCss;
+    var countryCodeDropDownCss;
 
     if(Y.one('body').getStyle('direction') === 'ltr') {
       countryCodeDropDownCss = 'country-code-drop-down-ltr-css';
