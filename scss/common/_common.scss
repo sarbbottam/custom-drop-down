@@ -1,15 +1,15 @@
-.js.modern .clipped {
+.clipped {
   clip: rect(0, 0, 0, 0);
   clip: rect(0 0 0 0);
   position: absolute;
 }
 
-.no-js .clipped {
-  margin: 15px 0 5px;
-  display: inline-block;
-  font-size: 18px;
-  font-weight: 400;
-  color: #343D47;
+.highlight-border {
+  border: $highlight_border;
+}
+
+.highlight-background {
+  background-color : $highlight_background_color;
 }
 
 .clear {

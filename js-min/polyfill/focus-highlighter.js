@@ -1,0 +1,1 @@
+YUI.add("focus-highlighter",function(a){highlightDesiredNodeBorder=function(){this.addClass("highlight-border")},unHighlightDesiredNodeBorder=function(){this.removeClass("highlight-border")},a.all("input, select").each(function(a){a.on("focus",highlightDesiredNodeBorder),a.on("blur",unHighlightDesiredNodeBorder)})},"0.0.1",{requires:["node"]});

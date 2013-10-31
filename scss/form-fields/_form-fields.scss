@@ -28,5 +28,17 @@
   cursor: pointer;
 }
 
+.js.modern .field-label {
+  display: none;
+}
+
+.no-js .field-label, .lt-ie8  .field-label {
+  margin: 15px 0 5px;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 400;
+  color: #343D47;
+}
+
 @import "form-fields-lt-ie8";
 @import "placeholder";

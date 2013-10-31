@@ -1,11 +1,19 @@
 var YUI_config = {
-  combine: true,
+  combine: false,
   groups: {
     app: {
       'modules': {
         //polyfill
         'placeholder' : {
           fullpath: '../js/polyfill/placeholder.js',
+          requires: ['node']
+        },
+        'focus-highlighter' : {
+          fullpath: '../js/polyfill/focus-highlighter.js',
+          requires: ['node']
+        },
+        'include-polyfills' : {
+          fullpath: '../js/polyfill/include-polyfills.js',
           requires: ['node']
         },
         // flags css

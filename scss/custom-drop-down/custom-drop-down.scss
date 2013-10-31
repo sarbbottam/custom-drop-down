@@ -1,13 +1,5 @@
 @import "config";
 
-.highlight-border {
-  border: $highlight_border;
-}
-
-.highlight-background {
-  background-color : $highlight_background_color;
-}
-
 .selected-option {
   position: absolute;
   font-size: $form_fields_font_size/$base_font_size+em;

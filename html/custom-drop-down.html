@@ -24,7 +24,7 @@
         <div class='input-container'>
 
           <div class='row input-row'>
-            <!-- <label for='mandatory-country-code-select' class='clipped'>Country Code</label> -->
+            <label class='field-label'>Country Code</label>
             <select id='mandatory-country-code-select' custom-drop-down-type='country-code' corresponding-field-id='mandatory-mobile' aria-label='Country code for mandatory mobile number'>
               <option country-tld='af' value='+93' corresponding-field-data-format='XXX-XXXX-XXX'>Afghanistan (+93)</option>
               <option country-tld='al' value='+355'>Albania (+355)</option>
@@ -246,13 +246,13 @@
             </select>
           </div>
           <div class='row'>
-            <!-- <label for='mandatory-mobile' class='clipped'>Mandatory mobile number</label> -->
+            <label class='field-label'>Mandatory mobile number</label>
             <input type='text' id='mandatory-mobile' autocorrect='off' autocapitalize='off' autocomplete='off' maxlength='15' aria-required='true' aria-describedby='mandatory-mobile-validation-message' placeholder='Mandatory mobile number' aria-label='Mandatory mobile number' value=''/>
           </div>
           <p class='validation-message' id='mandatory-mobile-validation-message'></p>
 
           <div class='row input-row'>
-            <!-- <label for='optional-country-code-select' class='clipped'>Country Code</label> -->
+            <label class='field-label'>Country Code</label>
             <select id='optional-country-code-select' custom-drop-down-type='country-code' corresponding-field-id='optional-mobile' aria-label='Country code for optional mobile number'>
               <option country-tld='af' value='+93' corresponding-field-data-format='XXX-XXXX-XXX'>Afghanistan (+93)</option>
               <option country-tld='al' value='+355'>Albania (+355)</option>
@@ -474,13 +474,13 @@
             </select>
           </div>
           <div class='row'>
-            <!-- <label for='optional-mobile' class='clipped'>Optional mobile number</label> -->
+            <label class='field-label'>Optional mobile number</label>
             <input type='text' id='optional-mobile' autocorrect='off' autocapitalize='off' autocomplete='off' maxlength='15' aria-required='true' aria-describedby='optional-mobile-validation-message' placeholder='Optional mobile number' aria-label='Optional mobile number' value=''/>
           </div>
           <p class='validation-message' id='optional-mobile-validation-message'></p>
 
           <div class='row input-row'>
-            <!-- <label for='country' class='clipped'>Country</label> -->
+            <label class='field-label'>Country</label>
             <select id='country' custom-drop-down-type='country' aria-label="Country">
               <option country-tld='af' value='Afghanistan'>Afghanistan</option>
               <option country-tld='al' value='Albania'>Albania</option>
@@ -701,16 +701,17 @@
               <option country-tld='zw' value='Zimbabwe'>Zimbabwe</option>
             </select>
           </div>
+          <p class='validation-message' id='country-validation-message'></p>
           <div class='row button-row'>
             <button type='submit' class='submit'><span>Submit</span></button>
           </div>
         </div>
       </div>
-    <script src="http://yui.yahooapis.com/3.12.0/build/yui/yui-min.js"></script>
-    <!--script src="http://localhost:8000/combo/yui?build/yui/yui-min.js"></script-->
+    <!--script src="http://yui.yahooapis.com/3.12.0/build/yui/yui-min.js"></script-->
+    <script src="http://localhost:8000/combo/yui?build/yui/yui-min.js"></script>
     <script src="../js/yui-config.js"></script>
     <script>
-      YUI().use('placeholder', 'country-code-drop-down', 'country-drop-down', 'mobile-number-formatter');
+      YUI().use('include-polyfills', 'country-code-drop-down', 'country-drop-down', 'mobile-number-formatter');
     </script>
   </body>
 </html>
