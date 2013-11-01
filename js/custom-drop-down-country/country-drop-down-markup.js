@@ -27,15 +27,16 @@ YUI.add('country-drop-down-markup', function(Y) {
     createAndInjectSelectedOptionHTML : function() {
       var selectedOptionHTML = this.selectedOptionHTML,
         optionNodes = this.optionNodes,
-        selectedIndex = this.selectedIndex;
+        selectedIndex = this.selectedIndex,
+        ariaLabelledby = Y.one('#'+this.selectNode.getAttribute('aria-labelledby')).get('innerHTML'),
+        selectedItemText = optionNodes.item(selectedIndex).get('innerHTML'),
+        ariaLabel = selectedItemText + ' ' + ariaLabelledby;
         selectedOptionHTML.push('<div id="'+ this.selectedOptionId +'" class="column selected-country selected-option">');
-          //selectedOptionHTML.push('<a href="#'+ this.availableOptionsContainerId + '" role="button" aria-haspopup="true" aria-labelledby="'+ this.selectedOptionAriaLabeledById +'">');
-          selectedOptionHTML.push('<a href="#'+ this.availableOptionsContainerId + '" role="button" aria-haspopup="true" aria-label="'+ optionNodes.item(selectedIndex).get('innerHTML') + ' ' + this.selectNode.getAttribute('aria-label') +'">');
+          selectedOptionHTML.push('<a href="#'+ this.availableOptionsContainerId + '" role="button" aria-haspopup="true" aria-label="'+ ariaLabel +'">');
 
             selectedOptionHTML.push('<span class="flag-');
             selectedOptionHTML.push(optionNodes.item(selectedIndex).getAttribute('country-tld'));
             selectedOptionHTML.push('"></span>&nbsp;&nbsp;');
-            //selectedOptionHTML.push('<span id="'+ this.selectedOptionAriaLabeledById +'" class="clipped">'+ optionNodes.item(selectedIndex).get('innerHTML')+'</span>');
             selectedOptionHTML.push(optionNodes.item(selectedIndex).get('value'));
             selectedOptionHTML.push('<span class="country-arrow-container drop-down-arrow-container"><span class="country-arrow drop-down-arrow"></span></span>');
 
@@ -81,8 +82,7 @@ YUI.add('country-drop-down-markup', function(Y) {
 
         this.selectedOptionNode.append(availableOptionsHTML);
 
-        this.selectNode.setStyle('visibility', 'hidden');
-        this.selectNode.setAttribute('aria-hidden', true);
+        this.selectNode.hide();
 
         this.availableOptionsContainerNode = Y.one('#' + this.availableOptionsContainerId);
         return {

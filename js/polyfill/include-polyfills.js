@@ -15,4 +15,9 @@ YUI.add('include-polyfills', function (Y) {
     Y.use('focus-highlighter');
   }
 
+  // include password mask toggle
+  if (Y.one('html').hasClass('modern') && !Y.one('html').hasClass('lt-ie9')) {
+    Y.use('toggle-password-mask');
+  }
+
 }, '0.0.1', {requires: ['node']});

@@ -21,6 +21,7 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
     this.desiredOptionStartsWith = '';
     this.currentKeyPressTime = 0;
     this.previousKeyPressTime = 0;
+    this.ariaLabelledby = Y.one('#'+this.selectNode.getAttribute('aria-labelledby')).get('innerHTML');
   };
 
   Y.mix(CustomDropDownEventHandler.prototype, {
@@ -105,7 +106,9 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
 
     selectOption : function(e, _this){
       e.halt();
-      var selectedIndex = _this.availableOptionsContainerNode.all('li').indexOf(e.target.get('parentNode'));
+      var selectedIndex = _this.availableOptionsContainerNode.all('li').indexOf(e.target.get('parentNode')),
+       selectedItemText = _this.optionNodes.item(selectedIndex).get('innerHTML'),
+       ariaLabel = selectedItemText + ' ' + _this.ariaLabelledby;
 
       // if the selected option is immediate previous selected do not process
       if(_this.selectNode.get('selectedIndex') !== selectedIndex) {
@@ -121,8 +124,7 @@ YUI.add('custom-drop-down-event-handler', function(Y) {
 
         _this.selectNode.simulate('change');
 
-        //Y.one('#' + _this.selectedOptionAriaLabeledById).set('innerHTML',_this.optionNodes.item(selectedIndex).get('innerHTML'));
-        _this.selectedOptionNode.one('a').setAttribute('aria-label', _this.optionNodes.item(selectedIndex).get('innerHTML') + ' ' + _this.selectNode.getAttribute('aria-label'));
+        _this.selectedOptionNode.one('a').setAttribute('aria-label', ariaLabel);
       }
 
       // hide availableOptionsContainerNode

@@ -24,8 +24,8 @@
         <div class='input-container'>
 
           <div class='row input-row'>
-            <label class='field-label'>Country Code</label>
-            <select id='mandatory-country-code-select' custom-drop-down-type='country-code' corresponding-field-id='mandatory-mobile' aria-label='Country code for mandatory mobile number'>
+            <label class='field-label' id='mandatory-country-code-select-label'>Country Code for mandatory mobile number</label>
+            <select id='mandatory-country-code-select' custom-drop-down-type='country-code' corresponding-field-id='mandatory-mobile' aria-labelledby='mandatory-country-code-select-label'>
               <option country-tld='af' value='+93' corresponding-field-data-format='XXX-XXXX-XXX'>Afghanistan (+93)</option>
               <option country-tld='al' value='+355'>Albania (+355)</option>
               <option country-tld='dz' value='+213'>Algeria (+213)</option>
@@ -246,14 +246,14 @@
             </select>
           </div>
           <div class='row'>
-            <label class='field-label'>Mandatory mobile number</label>
-            <input type='text' id='mandatory-mobile' autocorrect='off' autocapitalize='off' autocomplete='off' maxlength='15' aria-required='true' aria-describedby='mandatory-mobile-validation-message' placeholder='Mandatory mobile number' aria-label='Mandatory mobile number' value=''/>
+            <label class='field-label' id='mandatory-mobile-label'>Mandatory mobile number</label>
+            <input type='text' id='mandatory-mobile' maxlength='15' aria-required='true' aria-describedby='mandatory-mobile-validation-message' placeholder='Mandatory mobile number' aria-labelledby='mandatory-mobile-label'/>
           </div>
-          <p class='validation-message' id='mandatory-mobile-validation-message'></p>
+          <p class='message' id='mandatory-mobile-validation-message'></p>
 
           <div class='row input-row'>
-            <label class='field-label'>Country Code</label>
-            <select id='optional-country-code-select' custom-drop-down-type='country-code' corresponding-field-id='optional-mobile' aria-label='Country code for optional mobile number'>
+            <label class='field-label' id='optional-country-code-select-label'>Country Code for optional recovery phone number</label>
+            <select id='optional-country-code-select' custom-drop-down-type='country-code' corresponding-field-id='optional-mobile' aria-labelledby='optional-country-code-select-label'>
               <option country-tld='af' value='+93' corresponding-field-data-format='XXX-XXXX-XXX'>Afghanistan (+93)</option>
               <option country-tld='al' value='+355'>Albania (+355)</option>
               <option country-tld='dz' value='+213'>Algeria (+213)</option>
@@ -474,14 +474,14 @@
             </select>
           </div>
           <div class='row'>
-            <label class='field-label'>Optional mobile number</label>
-            <input type='text' id='optional-mobile' autocorrect='off' autocapitalize='off' autocomplete='off' maxlength='15' aria-required='true' aria-describedby='optional-mobile-validation-message' placeholder='Optional mobile number' aria-label='Optional mobile number' value=''/>
+            <label class='field-label' id='optional-mobile-label'>Optional recovery phone number</label>
+            <input type='text' id='optional-mobile' autocomplete='off' maxlength='15' aria-describedby='optional-mobile-validation-message' placeholder='Optional recovery phone number' aria-labelledby='optional-mobile-label'/>
           </div>
-          <p class='validation-message' id='optional-mobile-validation-message'></p>
+          <p class='message' id='optional-mobile-validation-message'></p>
 
           <div class='row input-row'>
-            <label class='field-label'>Country</label>
-            <select id='country' custom-drop-down-type='country' aria-label="Country">
+            <label class='field-label' id='country-label'>Country</label>
+            <select id='country' custom-drop-down-type='country' aria-labelledby="country-label">
               <option country-tld='af' value='Afghanistan'>Afghanistan</option>
               <option country-tld='al' value='Albania'>Albania</option>
               <option country-tld='dz' value='Algeria'>Algeria</option>
@@ -701,7 +701,8 @@
               <option country-tld='zw' value='Zimbabwe'>Zimbabwe</option>
             </select>
           </div>
-          <p class='validation-message' id='country-validation-message'></p>
+          <p class='message' id='country-validation-message'></p>
+
           <div class='row button-row'>
             <button type='submit' class='submit'><span>Submit</span></button>
           </div>

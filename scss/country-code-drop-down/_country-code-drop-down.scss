@@ -1,4 +1,5 @@
 .selected-country-code {
+  position: absolute;
   @if $direction == 'ltr' {
     left: 1px;
   } @else {

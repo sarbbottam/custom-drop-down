@@ -1,7 +1,6 @@
 @import "config";
 
 .selected-option {
-  position: absolute;
   font-size: $form_fields_font_size/$base_font_size+em;
   top: 1px;
   & > a {

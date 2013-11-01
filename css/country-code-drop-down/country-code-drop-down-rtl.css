@@ -5,22 +5,23 @@
 /* texts */
 /* line 1, ../../scss/country-code-drop-down/_country-code-drop-down.scss */
 .selected-country-code {
+  position: absolute;
   right: 1px;
 }
-/* line 7, ../../scss/country-code-drop-down/_country-code-drop-down.scss */
+/* line 8, ../../scss/country-code-drop-down/_country-code-drop-down.scss */
 .selected-country-code > a {
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
 }
 
-/* line 18, ../../scss/country-code-drop-down/_country-code-drop-down.scss */
+/* line 19, ../../scss/country-code-drop-down/_country-code-drop-down.scss */
 .country-code-arrow {
   position: absolute;
   top: -7px;
   right: 5px;
 }
 
-/* line 28, ../../scss/country-code-drop-down/_country-code-drop-down.scss */
+/* line 29, ../../scss/country-code-drop-down/_country-code-drop-down.scss */
 .country-codes-container {
   width: 30.5em;
   right: -1px;
